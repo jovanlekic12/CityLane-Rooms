@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Layout from "./components/Layout";
-import { useEffect, useState } from "react";
 import { fetchCabins } from "./API/cabins";
 
 function App() {
