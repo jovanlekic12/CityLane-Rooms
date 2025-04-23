@@ -1,7 +1,8 @@
 import { fetchCabins } from "../../../API/cabins";
 import { useFetchData } from "../../../API/useFetchData";
+import Button from "../../../components/Button";
 import { Cabin } from "../../../utils/types";
-
+import { TbDotsVertical } from "react-icons/tb";
 function CabinsMain() {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
 
@@ -34,6 +35,9 @@ function CabinsMain() {
             ) : (
               <div>-</div>
             )}
+            <Button type="options">
+              <TbDotsVertical></TbDotsVertical>
+            </Button>
           </li>
         ))}
       </ul>

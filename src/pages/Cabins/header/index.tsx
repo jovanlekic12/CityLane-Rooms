@@ -5,7 +5,9 @@ function CabinsHeader() {
     <div className="section__header">
       <h1 className="section__heading">All cabins</h1>
       <div className="section__header__right">
-        <Button type="filter">All</Button>
+        <Button type="filter" className="btn-filter-active">
+          All
+        </Button>
         <Button type="filter">No discount</Button>
         <Button type="filter">With discount</Button>
         <select>
