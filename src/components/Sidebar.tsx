@@ -38,7 +38,7 @@ function Sidebar() {
         />
         <h4 className="logo__header">City Lane Rooms</h4>
       </div>
-      <div className="sidebar__buttons">
+      <div className="sidebar__links">
         {pages.map((page) => {
           return (
             <Link to={page.name} className="sidebar__link">
