@@ -3,7 +3,6 @@ import { PropsWithChildren } from "react";
 type ButtonProps = {
   onClick?: () => void;
   isActive?: boolean;
-  className?: string;
   type?: string;
 };
 
@@ -12,7 +11,6 @@ function Button({
   onClick,
   type,
   isActive,
-  className,
 }: PropsWithChildren<ButtonProps>) {
   const rootClass = "btn";
 
@@ -25,7 +23,7 @@ function Button({
     .join(" ");
 
   return (
-    <button className={`${classes} ${className}`} onClick={onClick}>
+    <button className={`${classes}`} onClick={onClick}>
       {children}
     </button>
   );
