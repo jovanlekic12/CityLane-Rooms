@@ -1,11 +1,27 @@
-import { TbDotsVertical } from "react-icons/tb";
 import Button from "../../../../components/Button";
 import { Cabin } from "../../../../utils/types";
 import { Dialog } from "../../../../components/Dialog";
 import { useState } from "react";
+import { IoCopy, IoPencil } from "react-icons/io5";
+import { TiDelete } from "react-icons/ti";
 
 function CabinItem({ cabin }: { cabin: Cabin }) {
   const [showDialog, setShowDialog] = useState(false);
+
+  const options = [
+    {
+      text: "Duplicate",
+      svg: <IoCopy />,
+    },
+    {
+      text: "Edit",
+      svg: <IoPencil />,
+    },
+    {
+      text: "Delete",
+      svg: <TiDelete />,
+    },
+  ];
 
   return (
     <li key={cabin.id} className="section__list__item">
@@ -23,18 +39,17 @@ function CabinItem({ cabin }: { cabin: Cabin }) {
           type="options"
           onClick={() => {
             setShowDialog(true);
-            console.log(showDialog);
           }}
         >
-          <TbDotsVertical></TbDotsVertical>
+          0
         </Button>
+        {showDialog && (
+          <Dialog
+            onClickOutside={() => setShowDialog(false)}
+            options={options}
+          />
+        )}
       </div>
-      {showDialog && (
-        <Dialog
-          onClickOutside={() => setShowDialog(false)}
-          text="Click outside to close this"
-        />
-      )}
     </li>
   );
 }

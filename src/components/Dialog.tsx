@@ -1,18 +1,30 @@
-import { useRef } from "react";
-import { useClickOutside } from "../utils/helpers";
+import { ReactNode, useRef } from "react";
+import { useClickOutside } from "../hooks/useClickOutside";
 
-type DialogProps = {
-  onClickOutside: () => void;
+type Option = {
+  svg: ReactNode;
   text: string;
 };
 
-export const Dialog = ({ onClickOutside, text }: DialogProps) => {
+type DialogProps = {
+  onClickOutside: () => void;
+  options: Option[];
+};
+
+export const Dialog = ({ onClickOutside, options }: DialogProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, onClickOutside);
 
   return (
     <div ref={ref} className="dialog-component">
-      {text}
+      {options.map((option) => {
+        return (
+          <button className="dialog__btn">
+            {option.svg}
+            {option.text}
+          </button>
+        );
+      })}
     </div>
   );
 };

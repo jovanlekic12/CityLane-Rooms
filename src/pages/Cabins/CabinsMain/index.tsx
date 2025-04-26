@@ -1,12 +1,9 @@
 import { fetchCabins } from "../../../API/cabins";
 import { useFetchData } from "../../../API/useFetchData";
-import Button from "../../../components/Button";
 import { Cabin } from "../../../utils/types";
-import { TbDotsVertical } from "react-icons/tb";
 import Loader from "../../../components/Loader";
-import { useState } from "react";
-import { Dialog } from "../../../components/Dialog";
 import CabinItem from "./CabinItem";
+import Button from "../../../components/Button";
 
 function CabinsMain() {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
@@ -29,6 +26,7 @@ function CabinsMain() {
           })}
         </ul>
       )}
+      <Button type="standard">Add new cabin</Button>
     </div>
   );
 }
