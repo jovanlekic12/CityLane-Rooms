@@ -3,8 +3,9 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { MdOutlineCabin } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link} from "react-router";
 function Sidebar() {
+
   const pages = [
     {
       name: "Home",

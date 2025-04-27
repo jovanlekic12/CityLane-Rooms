@@ -1,0 +1,38 @@
+import Button from "./Button";
+
+type FormProps = {
+    setIsFormOpened: (isOpen: boolean) => void;
+}
+
+
+export default function CabinForm({setIsFormOpened}:FormProps) {
+    return <div className="form__overlay">
+        <form className="cabin__form">
+            <div className="form__div">
+                <label className="form__label">Cabin name</label>
+                <input type="text" />
+            </div>
+            <div className="form__div">
+                <label className="form__label">Maximum capacity
+                </label>
+                <input type="text" />
+            </div><div className="form__div">
+                <label className="form__label">Regular price</label>
+                <input type="text" />
+            </div><div className="form__div">
+                <label className="form__label">Discount</label>
+                <input type="text" />
+            </div><div className="form__div">
+                <label className="form__label">Description for website</label>
+                <input type="text" />
+            </div><div className="form__div">
+                <label className="form__label">Cabin photo</label>
+                <input type="text" />
+            </div>
+            <div className="form__buttons__div">
+                <Button type="cancel" onClick={()=>setIsFormOpened(false)}>Cancel</Button>
+                <Button type='submit'>Create new cabin</Button>
+            </div>
+        </form>
+    </div>
+}
