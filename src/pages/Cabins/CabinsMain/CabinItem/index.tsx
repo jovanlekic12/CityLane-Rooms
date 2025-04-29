@@ -29,7 +29,7 @@ function CabinItem({ cabin }: { cabin: Cabin }) {
       <div className="cabin__number">{String(cabin.id).padStart(3, "0")}</div>
       <div className="cabin__capacity">Fits up to {cabin.capacity} guests</div>
       <div className="cabin__price">${cabin.price.toFixed(2)}</div>
-      {cabin.discount ? (
+      {cabin.discount>0 ? (
         <div className="cabin__discount">${cabin.discount.toFixed(2)}</div>
       ) : (
         <div>-</div>

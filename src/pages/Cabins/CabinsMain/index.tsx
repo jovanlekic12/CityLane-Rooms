@@ -4,10 +4,29 @@ import { Cabin } from "../../../utils/types";
 import Loader from "../../../components/Loader";
 import CabinItem from "./CabinItem";
 import Button from "../../../components/Button";
+import { useState } from "react";
 
 function CabinsMain() {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
   const { data: cabins, isLoading } = useFetchData<Cabin>(fetchCabins);
+
+  const [newCabin, setNewCabin] = useState<Cabin>({
+    id: 0,
+    name: '',
+    capacity: 0,
+    price: 0,
+    discount: null,
+    img: '',
+  });
+  
+
+  function handleNewCabin(key: string, value: string) {
+    setNewCabin(prev => ({
+      ...prev,
+      [key]: value,
+    }));
+    console.log(newCabin)
+  }
 
   console.log(cabins);
   return (
