@@ -5,4 +5,5 @@ export type Cabin = {
   capacity: number;
   price: number;
   discount: number;
+  description: string;
 };

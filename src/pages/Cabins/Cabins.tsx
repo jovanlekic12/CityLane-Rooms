@@ -4,6 +4,7 @@ import CabinsHeader from "./header";
 import CabinForm from "../../components/CabinForm";
 import { createPortal } from 'react-dom';
 import { Cabin } from "../../utils/types";
+import { InsertNewCabin } from "../../API/cabins";
 
 function Cabins() {
 
@@ -14,8 +15,12 @@ function Cabins() {
     price: 0,
     discount: 0,
     img: '',
+    description: '',
   });
   
+  function handleSubmit(cabin:Cabin) {
+    InsertNewCabin(cabin)
+  }
 
   function handleNewCabin(key: string, value: string|number) {
     setNewCabin(prev => ({
@@ -30,7 +35,7 @@ function Cabins() {
       <section className="section">
         <CabinsHeader />
         <CabinsMain />
-        {isFormOpened && createPortal(<CabinForm setIsFormOpened={setIsFormOpened} handleNewCabin={handleNewCabin}/>,document.body)}
+        {isFormOpened && createPortal(<CabinForm setIsFormOpened={setIsFormOpened} handleNewCabin={handleNewCabin} handleSubmit={handleSubmit}/>,document.body)}
       </section>
     </main>
   );

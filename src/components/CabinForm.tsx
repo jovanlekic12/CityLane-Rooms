@@ -1,34 +1,57 @@
-import Button from "./Button";
+import { useState } from "react";
+import { Cabin } from "../utils/types";
+import Button from "./Button"
+import { InsertNewCabin } from "../API/cabins";
+
 
 type FormProps = {
-    setIsFormOpened: (isOpen: boolean) => void;
-    handleNewCabin: (key:string,value:number|string)=>void;
+    setIsFormOpened: (isOpened:boolean)=>void;
 }
 
+export default function CabinForm({setIsFormOpened}:FormProps) {
 
-export default function CabinForm({setIsFormOpened,handleNewCabin}:FormProps) {
+    const [newCabin, setNewCabin] = useState<Cabin>({
+        id: 0,
+        name: '',
+        capacity: 0,
+        price: 0,
+        discount: 0,
+        img: '',
+        description: '',
+      });
+      
+      function handleSubmit(cabin:Cabin) {
+        InsertNewCabin(cabin)
+      }
+    
+      function handleNewCabin(key: string, value: string|number) {
+        setNewCabin(prev => ({
+          ...prev,
+          [key]: value,
+        }))};
+
     return <div className="form__overlay">
-        <form className="cabin__form">
+        <form className="cabin__form" onSubmit={()=>handleSubmit(newCabin)}>
             <div className="form__div">
                 <label className="form__label">Cabin name</label>
-                <input type="text" name="name" onChange={(e)=>handleNewCabin(e.target.name,e.target.value)}/>
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="text" name="name"/>
             </div>
             <div className="form__div">
                 <label className="form__label">Maximum capacity
                 </label>
-                <input type="text" name='capacity'/>
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="number" name='capacity'/>
             </div><div className="form__div">
                 <label className="form__label">Regular price</label>
-                <input type="text" name='price'/>
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="number" name='price'/>
             </div><div className="form__div">
                 <label className="form__label">Discount</label>
-                <input type="text" name='discount'/>
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="number" name='discount'/>
             </div><div className="form__div">
                 <label className="form__label">Description for website</label>
-                <input type="text" />
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="text" />
             </div><div className="form__div">
                 <label className="form__label">Cabin photo</label>
-                <input type="text" name="photo"/>
+                <input onChange={(e)=>handleNewCabin(e.target.name,e.target.value)} type="text" name="photo"/>
             </div>
             <div className="form__buttons__div">
                 <Button type="cancel" onClick={()=>{setIsFormOpened(false)}}>Cancel</Button>
