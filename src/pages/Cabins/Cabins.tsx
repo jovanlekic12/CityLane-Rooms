@@ -2,40 +2,49 @@ import { useState } from "react";
 import CabinsMain from "./CabinsMain";
 import CabinsHeader from "./header";
 import CabinForm from "../../components/CabinForm";
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 import { Cabin } from "../../utils/types";
 import { InsertNewCabin } from "../../API/cabins";
 
 function Cabins() {
-
+  const [isFormOpened, setIsFormOpened] = useState(false);
   const [newCabin, setNewCabin] = useState<Cabin>({
     id: 0,
-    name: '',
+    name: "",
     capacity: 0,
     price: 0,
     discount: 0,
-    img: '',
-    description: '',
+    img: "",
+    description: "",
   });
-  
-  function handleSubmit(cabin:Cabin) {
-    InsertNewCabin(cabin)
+
+  function handleSubmit(cabin: Cabin, event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    InsertNewCabin(cabin);
   }
 
-  function handleNewCabin(key: string, value: string|number) {
-    setNewCabin(prev => ({
+  function handleNewCabin(key: string, value: string | number) {
+    setNewCabin((prev) => ({
       ...prev,
       [key]: value,
     }));
-    console.log(newCabin)
+    console.log(newCabin);
   }
-  const [isFormOpened,setIsFormOpened] = useState(true)
   return (
     <main className="main__container">
       <section className="section">
         <CabinsHeader />
-        <CabinsMain />
-        {isFormOpened && createPortal(<CabinForm setIsFormOpened={setIsFormOpened} handleNewCabin={handleNewCabin} handleSubmit={handleSubmit}/>,document.body)}
+        <CabinsMain setIsFormOpened={setIsFormOpened} />
+        {isFormOpened &&
+          createPortal(
+            <CabinForm
+              newCabin={newCabin}
+              setIsFormOpened={setIsFormOpened}
+              handleNewCabin={handleNewCabin}
+              handleSubmit={handleSubmit}
+            />,
+            document.body
+          )}
       </section>
     </main>
   );
