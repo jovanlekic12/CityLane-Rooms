@@ -5,9 +5,18 @@ import { useState } from "react";
 import { IoCopy, IoPencil } from "react-icons/io5";
 import { TiDelete } from "react-icons/ti";
 
-function CabinItem({ cabin }: { cabin: Cabin }) {
-  const [showDialog, setShowDialog] = useState(false);
+type CabinItemProps = {
+  setIsFormOpened: (isOpened: boolean) => void;
+  setCabinForEdit: (cabin: Cabin) => void;
+  cabin: Cabin;
+};
 
+function CabinItem({
+  cabin,
+  setIsFormOpened,
+  setCabinForEdit,
+}: CabinItemProps) {
+  const [showDialog, setShowDialog] = useState(false);
   const options = [
     {
       text: "Duplicate",
@@ -47,6 +56,9 @@ function CabinItem({ cabin }: { cabin: Cabin }) {
           <Dialog
             onClickOutside={() => setShowDialog(false)}
             options={options}
+            setIsFormOpened={setIsFormOpened}
+            setCabinForEdit={setCabinForEdit}
+            cabin={cabin}
           />
         )}
       </div>

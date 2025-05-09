@@ -1,29 +1,16 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
-
-export type Cabin = {
-  id?: string;
-  img: string;
-  name: string;
-  capacity: number;
-  price: number;
-  discount: number;
-  description: string;
-};
+import { EditCabin, InsertNewCabin } from "../API/cabins";
+import { Cabin } from "../utils/types";
 
 type CabinFormProps = {
-  initialData?: Cabin;
-  onSubmit: (data: Cabin) => void;
+  initialData?: Cabin | null;
   setIsFormOpened: (isOpened: boolean) => void;
 };
 
-const CabinForm = ({
-  initialData,
-  onSubmit,
-  setIsFormOpened,
-}: CabinFormProps) => {
+const CabinForm = ({ initialData, setIsFormOpened }: CabinFormProps) => {
   const [formData, setFormData] = useState<Cabin>({
-    id: "",
+    id: self.crypto.randomUUID(),
     img: "",
     name: "",
     capacity: 1,
@@ -44,67 +31,92 @@ const CabinForm = ({
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: ["price", "discount", "capacity"].includes(name)
-        ? Number(value)
-        : value,
+      [name]: value,
     }));
+    console.log(formData);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (initialData) {
+      EditCabin(formData);
+    } else {
+      InsertNewCabin(formData);
+    }
+    setIsFormOpened(false);
   };
-
   return (
-    <form onSubmit={handleSubmit} className="cabin-form">
-      <input
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="Name"
-      />
-      <input
-        name="img"
-        value={formData.img}
-        onChange={handleChange}
-        placeholder="Image URL"
-      />
-      <input
-        name="capacity"
-        type="number"
-        value={formData.capacity}
-        onChange={handleChange}
-        placeholder="Capacity"
-      />
-      <input
-        name="price"
-        type="number"
-        value={formData.price}
-        onChange={handleChange}
-        placeholder="Price"
-      />
-      <input
-        name="discount"
-        type="number"
-        value={formData.discount}
-        onChange={handleChange}
-        placeholder="Discount"
-      />
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        placeholder="Description"
-      />
-      <div className="button-row">
-        <Button type="button" onClick={() => setIsFormOpened(false)}>
-          Cancel
-        </Button>
-        <Button type="submit">
-          {initialData ? "Update Cabin" : "Create Cabin"}
-        </Button>
-      </div>
-    </form>
+    <div className="form__overlay">
+      <form onSubmit={handleSubmit} className="cabin__form">
+        <div className="form__div">
+          <label className="form__label">Cabin name</label>
+          <input
+            value={formData.name}
+            onChange={handleChange}
+            type="text"
+            name="name"
+          />
+        </div>
+        <div className="form__div">
+          <label className="form__label">Maximum capacity</label>
+          <input
+            value={formData.capacity}
+            onChange={handleChange}
+            type="number"
+            name="capacity"
+          />
+        </div>
+        <div className="form__div">
+          <label className="form__label">Regular price</label>
+          <input
+            value={formData.price}
+            onChange={handleChange}
+            type="number"
+            name="price"
+          />
+        </div>
+        <div className="form__div">
+          <label className="form__label">Discount</label>
+          <input
+            type="number"
+            name="discount"
+            value={formData.discount}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form__div">
+          <label className="form__label">Description for website</label>
+          <input
+            value={formData.description}
+            onChange={handleChange}
+            type="text"
+            name="description"
+          />
+        </div>
+        <div className="form__div">
+          <label className="form__label">Cabin photo</label>
+          <input
+            value={formData.img}
+            onChange={handleChange}
+            type="text"
+            name="img"
+          />
+        </div>
+        <div className="form__buttons__div">
+          <Button
+            type="cancel"
+            onClick={() => {
+              setIsFormOpened(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button type="submit">
+            {initialData ? "Edit cabin" : "Create new cabin"}
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

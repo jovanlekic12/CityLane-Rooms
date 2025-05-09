@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-export function useFetchData<T>(fetchHandler: () => Promise<T[]>) {
+export function useFetchData<T>(
+  fetchHandler: () => Promise<T[]>,
+  changer: boolean
+) {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -30,7 +33,7 @@ export function useFetchData<T>(fetchHandler: () => Promise<T[]>) {
     return () => {
       isMounted = false;
     };
-  }, [fetchHandler]);
+  }, [fetchHandler, changer]);
 
   return { isLoading, data, error };
 }

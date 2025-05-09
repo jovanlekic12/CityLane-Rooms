@@ -7,11 +7,16 @@ import Button from "../../../components/Button";
 
 type Props = {
   setIsFormOpened: (isOpened: boolean) => void;
+  setCabinForEdit: (cabin: Cabin) => void;
+  isFormOpened: boolean;
 };
 
-function CabinsMain({ setIsFormOpened }: Props) {
+function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
-  const { data: cabins, isLoading } = useFetchData<Cabin>(fetchCabins);
+  const { data: cabins, isLoading } = useFetchData<Cabin>(
+    fetchCabins,
+    isFormOpened
+  );
 
   return (
     <div className="section__main">
@@ -25,7 +30,13 @@ function CabinsMain({ setIsFormOpened }: Props) {
       ) : (
         <ul>
           {cabins.map((cabin) => {
-            return <CabinItem cabin={cabin} />;
+            return (
+              <CabinItem
+                cabin={cabin}
+                setIsFormOpened={setIsFormOpened}
+                setCabinForEdit={setCabinForEdit}
+              />
+            );
           })}
         </ul>
       )}

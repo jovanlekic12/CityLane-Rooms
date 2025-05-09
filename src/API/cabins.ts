@@ -9,11 +9,37 @@ export async function fetchCabins(): Promise<Cabin[]> {
   return data as Cabin[];
 }
 
-export async function InsertNewCabin(cabin:Cabin) {
-  const {}  = await supabase
-  .from('cabins')
-  .insert([
-    { id: cabin.id,name: cabin.name, img: cabin.img, capacity:cabin.capacity, price:cabin.price, discount: cabin.discount, description: cabin.description },
-  ])
-  .select()
+export async function InsertNewCabin(cabin: Cabin) {
+  const {} = await supabase
+    .from("cabins")
+    .insert([
+      {
+        id: cabin.id,
+        name: cabin.name,
+        img: cabin.img,
+        capacity: cabin.capacity,
+        price: cabin.price,
+        discount: cabin.discount,
+        description: cabin.description,
+      },
+    ])
+    .select();
+}
+
+export async function EditCabin(cabin: Cabin) {
+  const {} = await supabase
+    .from("cabins")
+    .update([
+      {
+        id: cabin.id,
+        name: cabin.name,
+        img: cabin.img,
+        capacity: cabin.capacity,
+        price: cabin.price,
+        discount: cabin.discount,
+        description: cabin.description,
+      },
+    ])
+    .eq("id", cabin.id)
+    .select();
 }
