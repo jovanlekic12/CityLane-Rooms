@@ -1,81 +1,111 @@
-import { Cabin } from "../utils/types";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 
-type FormProps = {
-  setIsFormOpened: (isOpened: boolean) => void;
-  handleNewCabin: (key: string, value: string | number) => void;
-  handleSubmit: (cabin: Cabin, event: React.FormEvent<HTMLFormElement>) => void;
-  newCabin: Cabin;
+export type Cabin = {
+  id?: string;
+  img: string;
+  name: string;
+  capacity: number;
+  price: number;
+  discount: number;
+  description: string;
 };
 
-export default function CabinForm({
+type CabinFormProps = {
+  initialData?: Cabin;
+  onSubmit: (data: Cabin) => void;
+  setIsFormOpened: (isOpened: boolean) => void;
+};
+
+const CabinForm = ({
+  initialData,
+  onSubmit,
   setIsFormOpened,
-  handleNewCabin,
-  handleSubmit,
-  newCabin,
-}: FormProps) {
+}: CabinFormProps) => {
+  const [formData, setFormData] = useState<Cabin>({
+    id: "",
+    img: "",
+    name: "",
+    capacity: 1,
+    price: 0,
+    discount: 0,
+    description: "",
+  });
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["price", "discount", "capacity"].includes(name)
+        ? Number(value)
+        : value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
   return (
-    <div className="form__overlay">
-      <form className="cabin__form" onSubmit={(e) => handleSubmit(newCabin, e)}>
-        <div className="form__div">
-          <label className="form__label">Cabin name</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="text"
-            name="name"
-          />
-        </div>
-        <div className="form__div">
-          <label className="form__label">Maximum capacity</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="number"
-            name="capacity"
-          />
-        </div>
-        <div className="form__div">
-          <label className="form__label">Regular price</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="number"
-            name="price"
-          />
-        </div>
-        <div className="form__div">
-          <label className="form__label">Discount</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="number"
-            name="discount"
-          />
-        </div>
-        <div className="form__div">
-          <label className="form__label">Description for website</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="text"
-          />
-        </div>
-        <div className="form__div">
-          <label className="form__label">Cabin photo</label>
-          <input
-            onChange={(e) => handleNewCabin(e.target.name, e.target.value)}
-            type="text"
-            name="photo"
-          />
-        </div>
-        <div className="form__buttons__div">
-          <Button
-            type="cancel"
-            onClick={() => {
-              setIsFormOpened(false);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button type="submit">Create new cabin</Button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="cabin-form">
+      <input
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+      <input
+        name="img"
+        value={formData.img}
+        onChange={handleChange}
+        placeholder="Image URL"
+      />
+      <input
+        name="capacity"
+        type="number"
+        value={formData.capacity}
+        onChange={handleChange}
+        placeholder="Capacity"
+      />
+      <input
+        name="price"
+        type="number"
+        value={formData.price}
+        onChange={handleChange}
+        placeholder="Price"
+      />
+      <input
+        name="discount"
+        type="number"
+        value={formData.discount}
+        onChange={handleChange}
+        placeholder="Discount"
+      />
+      <textarea
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        placeholder="Description"
+      />
+      <div className="button-row">
+        <Button type="button" onClick={() => setIsFormOpened(false)}>
+          Cancel
+        </Button>
+        <Button type="submit">
+          {initialData ? "Update Cabin" : "Create Cabin"}
+        </Button>
+      </div>
+    </form>
   );
-}
+};
+
+export default CabinForm;

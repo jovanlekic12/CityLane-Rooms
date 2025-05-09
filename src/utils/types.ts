@@ -1,5 +1,5 @@
 export type Cabin = {
-  id: number;
+  id: string;
   img: string;
   name: string;
   capacity: number;

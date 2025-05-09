@@ -26,10 +26,10 @@ function CabinItem({ cabin }: { cabin: Cabin }) {
   return (
     <li key={cabin.id} className="section__list__item">
       <img src={cabin.img} alt="cabin photo" className="cabin__img" />
-      <div className="cabin__number">{String(cabin.id).padStart(3, "0")}</div>
+      <div className="cabin__number">{cabin.name}</div>
       <div className="cabin__capacity">Fits up to {cabin.capacity} guests</div>
       <div className="cabin__price">${cabin.price.toFixed(2)}</div>
-      {cabin.discount>0 ? (
+      {cabin.discount > 0 ? (
         <div className="cabin__discount">${cabin.discount.toFixed(2)}</div>
       ) : (
         <div>-</div>
