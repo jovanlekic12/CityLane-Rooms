@@ -116,7 +116,6 @@ a:visited {
   outline: none;
   border: 0;
   cursor: pointer;
-
 }
 
 .btn-standard {
@@ -159,11 +158,11 @@ a:visited {
 
 .btn-submit {
   font-size: 1.4rem;
-    padding: 1.2rem 1.6rem;
-    font-weight: 500;
-    color: #fff;
-    background-color: #4f46e5;
-    border-radius: 0.5rem;
+  padding: 1.2rem 1.6rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #4f46e5;
+  border-radius: 0.5rem;
 }
 
 .btn-submit:hover {
@@ -330,12 +329,11 @@ select:focus {
 }
 
 .form__div {
-  display: grid
-;
-    align-items: center;
-    grid-template-columns: 24rem 1fr 1.2fr;
-    gap: 2.4rem;
-    padding: 1.2rem 0px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 24rem 1fr 1.2fr;
+  gap: 2.4rem;
+  padding: 1.2rem 0px;
 }
 .form__div label {
   font-weight: 400;
@@ -352,8 +350,13 @@ select:focus {
 }
 
 .form__buttons__div {
+  margin-top: 2rem;
   align-self: flex-end;
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+.form__err {
+  font-size: 1.4rem;
+  color: #b91c1c;
 }

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import CabinsMain from "./CabinsMain";
 import CabinsHeader from "./header";
-import CabinForm from "../../components/CabinForm";
 import { createPortal } from "react-dom";
 import { Cabin } from "../../utils/types";
+import CreateEditCabinHookForm from "../../components/CreateEditCabinHookForms";
 
 function Cabins() {
   const [isFormOpened, setIsFormOpened] = useState(false);
@@ -19,9 +19,10 @@ function Cabins() {
         />
         {isFormOpened &&
           createPortal(
-            <CabinForm
+            <CreateEditCabinHookForm
               setIsFormOpened={setIsFormOpened}
               initialData={cabinForEdit}
+              setCabinForEdit={setCabinForEdit}
             />,
             document.body
           )}
