@@ -91,7 +91,8 @@ const CreateEditCabinHookForm = ({
           <label className="form__label">Cabin photo</label>
           <input
             {...register("img", { required: "Cabin photo is required" })}
-            type="text"
+            type="file"
+            className="img__input"
           />
           {errors.img?.message && (
             <p className="form__err">{errors.img.message}</p>
