@@ -11,7 +11,6 @@ type CabinFormProps = {
 const CabinForm = ({ initialData, setIsFormOpened }: CabinFormProps) => {
   const [formData, setFormData] = useState<Cabin>({
     id: self.crypto.randomUUID(),
-    img: "",
     name: "",
     capacity: 1,
     price: 0,
@@ -95,12 +94,7 @@ const CabinForm = ({ initialData, setIsFormOpened }: CabinFormProps) => {
         </div>
         <div className="form__div">
           <label className="form__label">Cabin photo</label>
-          <input
-            value={formData.img}
-            onChange={handleChange}
-            type="text"
-            name="img"
-          />
+          <input onChange={handleChange} type="text" name="img" />
         </div>
         <div className="form__buttons__div">
           <Button

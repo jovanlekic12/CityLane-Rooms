@@ -2,6 +2,8 @@ import Button from "./Button";
 import { Cabin } from "../utils/types";
 import { useForm } from "react-hook-form";
 import { EditCabin, InsertNewCabin } from "../API/cabins";
+import { useState } from "react";
+import { supabase } from "../supabase/supabase";
 
 type CabinFormProps = {
   initialData?: Cabin | null;
@@ -22,15 +24,44 @@ const CreateEditCabinHookForm = ({
     defaultValues: initialData ? initialData : {},
   });
 
+  const [img, setImg] = useState<File | null>(null);
+
+  // async function onSubmit(data: Cabin) {
+  //   if (initialData) {
+  //     await EditCabin(data);
+  //   } else {
+  //     data.id = self.crypto.randomUUID();
+  //     await InsertNewCabin(data);
+  //   }
+  //   setIsFormOpened(false);
+  //   setCabinForEdit(null);
+  // }
+
   async function onSubmit(data: Cabin) {
-    if (initialData) {
-      await EditCabin(data);
-    } else {
-      data.id = self.crypto.randomUUID();
-      await InsertNewCabin(data);
+    try {
+      // Upload photo only if a new File is selected (not a string or null)
+      if (img) {
+        const { data: uploadData, error } = await supabase.storage
+          .from("cabin-photos")
+          .upload(`${img.name}`, img, {
+            upsert: false,
+          });
+
+        if (error) throw error;
+      }
+
+      if (initialData) {
+        await EditCabin(data);
+      } else {
+        data.id = self.crypto.randomUUID();
+        await InsertNewCabin(data);
+      }
+
+      setIsFormOpened(false);
+      setCabinForEdit(null);
+    } catch (error) {
+      console.error("Error uploading photo or submitting cabin:", error);
     }
-    setIsFormOpened(false);
-    setCabinForEdit(null);
   }
 
   return (
@@ -90,13 +121,10 @@ const CreateEditCabinHookForm = ({
         <div className="form__div">
           <label className="form__label">Cabin photo</label>
           <input
-            {...register("img", { required: "Cabin photo is required" })}
             type="file"
             className="img__input"
+            onChange={(e) => setImg(e.target.files?.[0] || null)}
           />
-          {errors.img?.message && (
-            <p className="form__err">{errors.img.message}</p>
-          )}
         </div>
         <div className="form__buttons__div">
           <Button

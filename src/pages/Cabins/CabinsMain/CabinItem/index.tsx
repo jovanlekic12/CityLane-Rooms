@@ -34,7 +34,11 @@ function CabinItem({
 
   return (
     <li key={cabin.id} className="section__list__item">
-      <img src={cabin.img} alt="cabin photo" className="cabin__img" />
+      <img
+        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/cabin-photos//${cabin.id}.jpg`}
+        alt="cabin photo"
+        className="cabin__img"
+      />
       <div className="cabin__number">{cabin.name}</div>
       <div className="cabin__capacity">Fits up to {cabin.capacity} guests</div>
       <div className="cabin__price">${cabin.price.toFixed(2)}</div>

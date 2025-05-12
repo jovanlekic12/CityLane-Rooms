@@ -16,7 +16,6 @@ export async function InsertNewCabin(cabin: Cabin) {
       {
         id: cabin.id,
         name: cabin.name,
-        img: cabin.img,
         capacity: cabin.capacity,
         price: cabin.price,
         discount: cabin.discount,
@@ -33,7 +32,6 @@ export async function EditCabin(cabin: Cabin) {
       {
         id: cabin.id,
         name: cabin.name,
-        img: cabin.img,
         capacity: cabin.capacity,
         price: cabin.price,
         discount: cabin.discount,
