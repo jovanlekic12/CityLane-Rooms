@@ -19,9 +19,14 @@ const CreateEditCabinHookForm = ({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
-    defaultValues: initialData ? initialData : {},
+    defaultValues: initialData
+      ? initialData
+      : {
+          id: self.crypto.randomUUID(),
+        },
   });
 
   const [img, setImg] = useState<File | null>(null);
@@ -37,13 +42,14 @@ const CreateEditCabinHookForm = ({
   //   setCabinForEdit(null);
   // }
 
+  console.log(watch());
+
   async function onSubmit(data: Cabin) {
     try {
-      // Upload photo only if a new File is selected (not a string or null)
       if (img) {
-        const { data: uploadData, error } = await supabase.storage
+        const { error } = await supabase.storage
           .from("cabin-photos")
-          .upload(`${img.name}`, img, {
+          .upload(`${data.id}.jpg`, img, {
             upsert: false,
           });
 
@@ -53,7 +59,6 @@ const CreateEditCabinHookForm = ({
       if (initialData) {
         await EditCabin(data);
       } else {
-        data.id = self.crypto.randomUUID();
         await InsertNewCabin(data);
       }
 
