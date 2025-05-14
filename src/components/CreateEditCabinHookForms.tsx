@@ -42,16 +42,24 @@ const CreateEditCabinHookForm = ({
   //   setCabinForEdit(null);
   // }
 
-  console.log(watch());
+  console.log(watch(), initialData?.id);
 
   async function onSubmit(data: Cabin) {
     try {
       if (img) {
+        if (initialData) {
+          const { error: removeError } = await supabase.storage
+            .from("cabin-photos")
+            .remove([`${data.id}.jpg`]);
+
+          console.log(initialData.id);
+          if (removeError) {
+            throw removeError;
+          }
+        }
         const { error } = await supabase.storage
           .from("cabin-photos")
-          .upload(`${data.id}.jpg`, img, {
-            upsert: false,
-          });
+          .upload(`${data.id}.jpg`, img);
 
         if (error) throw error;
       }

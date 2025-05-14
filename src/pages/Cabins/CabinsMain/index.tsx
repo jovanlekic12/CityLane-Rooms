@@ -4,17 +4,28 @@ import { Cabin } from "../../../utils/types";
 import Loader from "../../../components/Loader";
 import CabinItem from "./CabinItem";
 import Button from "../../../components/Button";
+import { useCallback } from "react";
 
 type Props = {
   setIsFormOpened: (isOpened: boolean) => void;
   setCabinForEdit: (cabin: Cabin) => void;
   isFormOpened: boolean;
+  params: URLSearchParams;
 };
 
-function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
+function CabinsMain({
+  setIsFormOpened,
+  setCabinForEdit,
+  isFormOpened,
+  params,
+}: Props) {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
+
+  const getCabins = useCallback(() => {
+    return fetchCabins(params);
+  }, [params]);
   const { data: cabins, isLoading } = useFetchData<Cabin>(
-    fetchCabins,
+    getCabins,
     isFormOpened
   );
 

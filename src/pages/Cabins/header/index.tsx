@@ -1,14 +1,20 @@
 import Button from "../../../components/Button";
 
-function CabinsHeader() {
+type HeaderProps = {
+  handleFilterChange: (filter: string) => void;
+};
+
+function CabinsHeader({ handleFilterChange }: HeaderProps) {
   return (
     <div className="section__header">
       <h1 className="section__heading">All cabins</h1>
       <div className="section__header__right">
-        <Button type="filter" className="btn-filter-active">
+        <Button type="filter" onClick={() => handleFilterChange("all")}>
           All
         </Button>
-        <Button type="filter">No discount</Button>
+        <Button type="filter" onClick={() => handleFilterChange("discount")}>
+          No discount
+        </Button>
         <Button type="filter">With discount</Button>
         <select>
           <option value="a-z">Sort by name (A-Z)</option>
