@@ -2,11 +2,44 @@ import { supabase } from "../supabase/supabase";
 import { Cabin } from "../utils/types";
 
 export async function fetchCabins(params: URLSearchParams): Promise<Cabin[]> {
-  const { data, error } = await supabase.from("cabins").select("*");
+  let query = supabase.from("cabins").select("*");
 
-  // const query = supabase.from("cabins").select("*");
-  console.log(params.get("discount"));
-  if (error) throw new Error(error.message);
+  const discount = params.get("discount");
+  if (discount === "discount") {
+    query = query.gt("discount", 0);
+  } else if (discount === "no-discount") {
+    query = query.eq("discount", 0);
+  }
+
+  const sort = params.get("sort");
+  console.log(sort);
+  switch (sort) {
+    case "name-asc":
+      query = query.order("name", { ascending: true });
+      break;
+    case "name-desc":
+      query = query.order("name", { ascending: false });
+      break;
+    case "price-asc":
+      query = query.order("price", { ascending: true });
+      break;
+    case "price-desc":
+      query = query.order("price", { ascending: false });
+      break;
+    case "capacity-asc":
+      query = query.order("capacity", { ascending: true });
+      break;
+    case "capacity-desc":
+      query = query.order("capacity", { ascending: false });
+      break;
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error("Error fetching cabins:", error);
+    return [];
+  }
 
   return data as Cabin[];
 }

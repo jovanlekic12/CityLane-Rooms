@@ -13,15 +13,33 @@ function Cabins() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
 
+  const handleSortChange = (sort: string) => {
+    const newParams = new URLSearchParams(params.toString());
+    if (sort) {
+      newParams.set("sort", sort);
+    } else {
+      newParams.delete("sort");
+    }
+    navigate({ search: newParams.toString() });
+  };
+
   const handleFilterChange = (filter: string) => {
-    params.set("discount", filter);
-    navigate({ search: params.toString() });
+    const newParams = new URLSearchParams(params.toString());
+    if (filter) {
+      newParams.set("discount", filter);
+    } else {
+      newParams.delete("discount");
+    }
+    navigate({ search: newParams.toString() });
   };
 
   return (
     <main className="main__container">
       <section className="section">
-        <CabinsHeader handleFilterChange={handleFilterChange} />
+        <CabinsHeader
+          handleFilterChange={handleFilterChange}
+          handleSortChange={handleSortChange}
+        />
         <CabinsMain
           params={params}
           setIsFormOpened={setIsFormOpened}

@@ -17,7 +17,7 @@ function Button({
   const classes = [
     rootClass,
     type && `${rootClass}-${type}`,
-    isActive && `${rootClass}-${isActive}`,
+    isActive && `${rootClass}-active`,
   ]
     .filter(Boolean)
     .join(" ");
