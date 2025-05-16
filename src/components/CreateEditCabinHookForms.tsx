@@ -19,7 +19,6 @@ const CreateEditCabinHookForm = ({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: initialData
@@ -30,19 +29,6 @@ const CreateEditCabinHookForm = ({
   });
 
   const [img, setImg] = useState<File | null>(null);
-
-  // async function onSubmit(data: Cabin) {
-  //   if (initialData) {
-  //     await EditCabin(data);
-  //   } else {
-  //     data.id = self.crypto.randomUUID();
-  //     await InsertNewCabin(data);
-  //   }
-  //   setIsFormOpened(false);
-  //   setCabinForEdit(null);
-  // }
-
-  console.log(watch(), initialData?.id);
 
   async function onSubmit(data: Cabin) {
     try {

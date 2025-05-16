@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useFetchData<T>(
   fetchHandler: () => Promise<T[]>,
-  changer: boolean
+  changer?: boolean
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<T[]>([]);
