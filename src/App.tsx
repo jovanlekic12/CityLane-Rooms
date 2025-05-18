@@ -3,14 +3,32 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Layout from "./components/Layout";
 import Cabins from "./pages/Cabins/Cabins";
 import Settings from "./pages/Settings/Settings";
+import LogInForm from "./components/LogInForm";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [token, setToken] = useState<string | null>(null);
+
+  if (token) {
+    sessionStorage.setItem("token", JSON.stringify(token));
+  }
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("token");
+    if (stored) {
+      setToken(JSON.parse(stored));
+    }
+  }, []);
+
+  console.log(token);
+
   return (
     <BrowserRouter>
       <Routes>
+        <Route index element={<LogInForm setToken={setToken} />} />
         <Route path="/" element={<Layout />}>
-          <Route path="cabins" element={<Cabins />} />
-          <Route path="settings" element={<Settings />} />
+          {token && <Route path="cabins" element={<Cabins />} />}
+          {token && <Route path="settings" element={<Settings />} />}
         </Route>
       </Routes>
     </BrowserRouter>

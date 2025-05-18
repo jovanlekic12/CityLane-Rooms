@@ -362,3 +362,47 @@ select:focus {
   font-size: 1.4rem;
   color: #b91c1c;
 }
+
+.login__container {
+  margin: 5rem auto;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__header {
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  color: #374151;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+.login__label {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.login__div input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  width: 35rem;
+}
