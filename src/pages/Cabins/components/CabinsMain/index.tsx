@@ -1,9 +1,9 @@
-import { fetchCabins } from "../../../API/cabins";
-import { useFetchData } from "../../../API/useFetchData";
-import { Cabin } from "../../../utils/types";
-import Loader from "../../../components/Loader";
+import { fetchCabins } from "../../../../API/cabins";
+import { useFetchData } from "../../../../API/useFetchData";
+import { Cabin } from "../../../../utils/types";
+import Loader from "../../../../components/Loader";
 import CabinItem from "./CabinItem";
-import Button from "../../../components/Button";
+import Button from "../../../../components/Button";
 import { useCallback } from "react";
 
 type Props = {

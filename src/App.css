@@ -365,6 +365,7 @@ select:focus {
 
 .login__container {
   margin: 5rem auto;
+  margin-left: 22rem;
   width: 50rem;
   display: flex;
   flex-direction: column;

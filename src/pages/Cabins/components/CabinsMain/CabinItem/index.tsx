@@ -1,7 +1,7 @@
-import Button from "../../../../components/Button";
-import { Cabin } from "../../../../utils/types";
-import { Dialog } from "../../../../components/Dialog";
+import Button from "../../../../../components/Button";
+import { Cabin } from "../../../../../utils/types";
 import { useState } from "react";
+import { Dialog } from "../../../../../components/Dialog";
 import { IoCopy, IoPencil } from "react-icons/io5";
 import { TiDelete } from "react-icons/ti";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CabinsMain from "./CabinsMain";
-import CabinsHeader from "./header";
+import CabinsMain from "./components/CabinsMain";
+import CabinsHeader from "./components/header";
 import { createPortal } from "react-dom";
 import { Cabin } from "../../utils/types";
 import CreateEditCabinHookForm from "../../components/CreateEditCabinHookForms";
@@ -22,7 +22,7 @@ function Cabins() {
     }
     navigate({ search: newParams.toString() });
   };
-
+  //reuse
   const handleFilterChange = (filter: string) => {
     const newParams = new URLSearchParams(params.toString());
     if (filter) {

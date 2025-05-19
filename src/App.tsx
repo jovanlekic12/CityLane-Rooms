@@ -1,10 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Layout from "./components/Layout";
-import Cabins from "./pages/Cabins/Cabins";
-import Settings from "./pages/Settings/Settings";
-import LogInForm from "./components/LogInForm";
+import Cabins from "./pages/Cabins/Index";
+import Settings from "./pages/Settings/Index";
 import { useEffect, useState } from "react";
+import LogInPage from "./pages/LogIn/Index";
 
 function App() {
   const [token, setToken] = useState<string | null>(null);
@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<LogInForm setToken={setToken} />} />
+        <Route index element={<LogInPage setToken={setToken} />} />
         <Route path="/" element={<Layout />}>
           {token && <Route path="cabins" element={<Cabins />} />}
           {token && <Route path="settings" element={<Settings />} />}

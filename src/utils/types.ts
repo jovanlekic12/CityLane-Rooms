@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Cabin = {
   id: string;
   name: string;
@@ -12,4 +14,8 @@ export type SettingsType = {
   maximumNights: number;
   maximumGuests: number;
   breakfastPrice: number;
+};
+
+export type LogInFormProps = {
+  setToken: Dispatch<SetStateAction<string | null>>;
 };
