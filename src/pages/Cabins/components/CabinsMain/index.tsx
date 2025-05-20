@@ -5,21 +5,18 @@ import Loader from "../../../../components/Loader";
 import CabinItem from "./CabinItem";
 import Button from "../../../../components/Button";
 import { useCallback } from "react";
+import { useSearchParams } from "react-router";
 
 type Props = {
   setIsFormOpened: (isOpened: boolean) => void;
   setCabinForEdit: (cabin: Cabin) => void;
   isFormOpened: boolean;
-  params: URLSearchParams;
 };
 
-function CabinsMain({
-  setIsFormOpened,
-  setCabinForEdit,
-  isFormOpened,
-  params,
-}: Props) {
+function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
+
+  const [params] = useSearchParams();
 
   const getCabins = useCallback(() => {
     return fetchCabins(params);

@@ -12,7 +12,6 @@ export async function fetchCabins(params: URLSearchParams): Promise<Cabin[]> {
   }
 
   const sort = params.get("sort");
-  console.log(sort);
   switch (sort) {
     case "name-asc":
       query = query.order("name", { ascending: true });

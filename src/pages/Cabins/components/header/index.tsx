@@ -1,13 +1,31 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
+import { useNavigate, useSearchParams } from "react-router";
 
-type HeaderProps = {
-  handleFilterChange: (filter: string) => void;
-  handleSortChange: (sort: string) => void;
-};
-
-function CabinsHeader({ handleFilterChange, handleSortChange }: HeaderProps) {
+function CabinsHeader() {
   const [activeBtn, setActiveBtn] = useState<string>("all");
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+
+  const handleSortChange = (sort: string, name: string) => {
+    const newParams = new URLSearchParams(params.toString());
+    if (sort) {
+      newParams.set(name, sort);
+    } else {
+      newParams.delete(name);
+    }
+    navigate({ search: newParams.toString() });
+  };
+  const handleFilterChange = (filter: string, name: string) => {
+    const newParams = new URLSearchParams(params.toString());
+    if (filter) {
+      newParams.set(name, filter);
+    } else {
+      newParams.delete(name);
+    }
+
+    navigate({ search: newParams.toString() });
+  };
 
   const filters = [
     { label: "All", value: "all" },
@@ -34,7 +52,7 @@ function CabinsHeader({ handleFilterChange, handleSortChange }: HeaderProps) {
             type="filter"
             isActive={activeBtn === filter.value}
             onClick={() => {
-              handleFilterChange(filter.value);
+              handleFilterChange(filter.value, "discount");
               setActiveBtn(filter.value);
             }}
           >
@@ -45,7 +63,7 @@ function CabinsHeader({ handleFilterChange, handleSortChange }: HeaderProps) {
         <select
           className="section__header__sort"
           value={sorts[0].value}
-          onChange={(e) => handleSortChange(e.target.value)}
+          onChange={(e) => handleSortChange(e.target.value, "sortBy")}
         >
           {sorts.map((sort) => (
             <option key={sort.value} value={sort.value}>

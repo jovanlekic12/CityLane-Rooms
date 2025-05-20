@@ -37,8 +37,6 @@ const CreateEditCabinHookForm = ({
           const { error: removeError } = await supabase.storage
             .from("cabin-photos")
             .remove([`${data.id}.jpg`]);
-
-          console.log(initialData.id);
           if (removeError) {
             throw removeError;
           }
@@ -46,10 +44,8 @@ const CreateEditCabinHookForm = ({
         const { error } = await supabase.storage
           .from("cabin-photos")
           .upload(`${data.id}.jpg`, img);
-
         if (error) throw error;
       }
-
       if (initialData) {
         await EditCabin(data);
       } else {
