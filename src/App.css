@@ -186,6 +186,10 @@ a:visited {
   gap: 0.5rem;
 }
 
+ul {
+  list-style: none;
+}
+
 select {
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
