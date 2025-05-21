@@ -1,10 +1,7 @@
 import Button from "./Button";
+import FormBlock from "./FormBlock";
 import { Cabin } from "../utils/types";
-import { useForm } from "react-hook-form";
-import { EditCabin, InsertNewCabin } from "../API/cabins";
-import { useState } from "react";
-import { supabase } from "../supabase/supabase";
-
+import { useCabinForm } from "../hooks/useCabinForm";
 type CabinFormProps = {
   initialData?: Cabin | null;
   setIsFormOpened: (isOpened: boolean) => void;
@@ -16,103 +13,35 @@ const CreateEditCabinHookForm = ({
   setIsFormOpened,
   setCabinForEdit,
 }: CabinFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: initialData
-      ? initialData
-      : {
-          id: self.crypto.randomUUID(),
-        },
-  });
+  const onSuccess = () => {
+    setIsFormOpened(false);
+    setCabinForEdit(null);
+  };
 
-  const [img, setImg] = useState<File | null>(null);
+  const { register, handleSubmit, errors, onSubmit, setImg } = useCabinForm(
+    initialData || null,
+    onSuccess
+  );
 
-  async function onSubmit(data: Cabin) {
-    try {
-      if (img) {
-        if (initialData) {
-          const { error: removeError } = await supabase.storage
-            .from("cabin-photos")
-            .remove([`${data.id}.jpg`]);
-          if (removeError) {
-            throw removeError;
-          }
-        }
-        const { error } = await supabase.storage
-          .from("cabin-photos")
-          .upload(`${data.id}.jpg`, img);
-        if (error) throw error;
-      }
-      if (initialData) {
-        await EditCabin(data);
-      } else {
-        await InsertNewCabin(data);
-      }
-
-      setIsFormOpened(false);
-      setCabinForEdit(null);
-    } catch (error) {
-      console.error("Error uploading photo or submitting cabin:", error);
-    }
-  }
+  const fields = [
+    { name: "name", type: "text", label: "Cabin name" },
+    { name: "capacity", type: "number", label: "Maximum capacity" },
+    { name: "price", type: "number", label: "Regular price" },
+    { name: "discount", type: "number", label: "Discount" },
+    { name: "description", type: "text", label: "Description for website" },
+  ];
 
   return (
     <div className="form__overlay">
-      <form
-        className="cabin__form"
-        onSubmit={handleSubmit((data) => onSubmit(data))}
-      >
-        <div className="form__div">
-          <label className="form__label">Cabin name</label>
-          <input
-            type="text"
-            {...register("name", { required: "Cabin name is required" })}
+      <form className="cabin__form" onSubmit={handleSubmit(onSubmit)}>
+        {fields.map((field) => (
+          <FormBlock
+            key={field.name}
+            {...field}
+            register={register}
+            errors={errors}
           />
-          {errors.name?.message && (
-            <p className="form__err">{errors.name.message}</p>
-          )}
-        </div>
-        <div className="form__div">
-          <label className="form__label">Maximum capacity</label>
-          <input
-            {...register("capacity", {
-              required: "Cabin capacity is required",
-            })}
-            type="number"
-          />
-          {errors.capacity?.message && (
-            <p className="form__err">{errors.capacity.message}</p>
-          )}
-        </div>
-        <div className="form__div">
-          <label className="form__label">Regular price</label>
-          <input
-            {...register("price", { required: "Cabin price is required" })}
-            type="number"
-          />
-          {errors.price?.message && (
-            <p className="form__err">{errors.price.message}</p>
-          )}
-        </div>
-        <div className="form__div">
-          <label className="form__label">Discount</label>
-          <input
-            {...register("discount", {
-              required: "Cabin discount is required",
-            })}
-            type="number"
-          />
-          {errors.discount?.message && (
-            <p className="form__err">{errors.discount.message}</p>
-          )}
-        </div>
-        <div className="form__div">
-          <label className="form__label">Description for website</label>
-          <input {...register("description")} type="text" />
-        </div>
+        ))}
         <div className="form__div">
           <label className="form__label">Cabin photo</label>
           <input

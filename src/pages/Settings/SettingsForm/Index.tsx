@@ -3,6 +3,7 @@ import { SettingsType } from "../../../utils/types";
 import Button from "../../../components/Button";
 import { useEffect } from "react";
 import { supabase } from "../../../supabase/supabase";
+import FormBlock from "../../../components/FormBlock";
 
 type FormProps = {
   settings?: SettingsType;
@@ -13,11 +14,11 @@ function SettingsForm({ settings }: FormProps) {
     register,
     handleSubmit,
     reset,
-
     formState: { errors },
-  } = useForm({
+  } = useForm<SettingsType>({
     defaultValues: settings,
   });
+
   useEffect(() => {
     reset(settings);
   }, [settings, reset]);
@@ -31,75 +32,47 @@ function SettingsForm({ settings }: FormProps) {
     if (error) throw error;
   }
 
+  const fields = [
+    {
+      name: "minimumNights",
+      label: "Minimum nights/bookings",
+      type: "number",
+      value: 1,
+      minMessage: "Minimum number of nights is 1",
+    },
+    {
+      name: "maximumNights",
+      label: "Maximum nights/bookings",
+      type: "number",
+      value: 1,
+      minMessage: "Minimum number of nights is 1",
+    },
+    {
+      name: "maximumGuests",
+      label: "Maximum guests/bookings",
+      type: "number",
+      value: 1,
+      minMessage: "Minimum number of guest is 1",
+    },
+    {
+      name: "breakfastPrice",
+      label: "Breakfast price",
+      type: "number",
+      value: 10,
+      minMessage: "Minimum price is 10$",
+    },
+  ];
+
   return (
-    <form
-      className="settings__form"
-      onSubmit={handleSubmit((data) => onSubmit(data))}
-    >
-      <div className="form__div">
-        <label className="form__label">Minimum nights/bookings</label>
-        <input
-          type="number"
-          {...register("minimumNights", {
-            required: "This field is required",
-            min: {
-              value: 1,
-              message: "Minimum number of nights is 1",
-            },
-          })}
+    <form className="settings__form" onSubmit={handleSubmit(onSubmit)}>
+      {fields.map((field) => (
+        <FormBlock
+          key={field.name}
+          {...field}
+          register={register}
+          errors={errors}
         />
-        {errors.minimumNights && (
-          <p className="form__err">{errors.minimumNights.message}</p>
-        )}
-      </div>
-      <div className="form__div">
-        <label className="form__label">Maximum nights/bookings</label>
-        <input
-          type="number"
-          {...register("maximumNights", {
-            required: "This field is required",
-            min: {
-              value: 1,
-              message: "Minimum number of nights is 1",
-            },
-          })}
-        />
-        {errors.maximumNights && (
-          <p className="form__err">{errors.maximumNights.message}</p>
-        )}
-      </div>
-      <div className="form__div">
-        <label className="form__label">Maximum guests/bookings</label>
-        <input
-          type="number"
-          {...register("maximumGuests", {
-            required: "This field is required",
-            min: {
-              value: 1,
-              message: "Minimum number of guest is 1",
-            },
-          })}
-        />
-        {errors.maximumGuests && (
-          <p className="form__err">{errors.maximumGuests.message}</p>
-        )}
-      </div>
-      <div className="form__div">
-        <label className="form__label">Breakfast price</label>
-        <input
-          type="number"
-          {...register("breakfastPrice", {
-            required: "This field is required",
-            min: {
-              value: 10,
-              message: "Minimum price is 10$",
-            },
-          })}
-        />
-        {errors.breakfastPrice && (
-          <p className="form__err">{errors.breakfastPrice.message}</p>
-        )}
-      </div>
+      ))}
       <Button type="submit">Submit settings</Button>
     </form>
   );
