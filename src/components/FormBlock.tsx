@@ -1,13 +1,24 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  FieldErrors,
+  FieldValues,
+  RegisterOptions,
+  UseFormRegister,
+  ValidationRule,
+} from "react-hook-form";
+import { SettingsType } from "../utils/types";
 
 type FormBlockProps = {
   name: string;
   label: string;
   type: string;
   register: UseFormRegister<any>;
-  errors: FieldErrors<any>;
+  errors: FieldErrors<FieldErrors>;
   value?: number;
   minMessage?: string;
+};
+
+type validationRules = {
+  required: string;
 };
 
 function FormBlock({
@@ -19,16 +30,9 @@ function FormBlock({
   value,
   minMessage,
 }: FormBlockProps) {
-  const validationRules: any = {
+  const validationRules: validationRules = {
     required: `${label} is required`,
   };
-
-  if (value !== undefined && minMessage) {
-    validationRules.min = {
-      value,
-      message: minMessage,
-    };
-  }
 
   return (
     <div className="form__div">

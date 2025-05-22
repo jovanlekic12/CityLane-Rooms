@@ -353,7 +353,8 @@ select:focus {
   justify-content: center;
 }
 
-.cabin__form {
+.cabin__form,
+.user__form {
   background-color: #fff;
   box-shadow: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
   border-radius: 1rem;

@@ -41,7 +41,7 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
           setIsFormOpened(true);
         }}
       >
-        Add new cabin
+        Add new user
       </Button>
     </section>
   );

@@ -19,3 +19,10 @@ export type SettingsType = {
 export type LogInFormProps = {
   setToken: Dispatch<SetStateAction<string | null>>;
 };
+
+export type newUser = {
+  userPassword: string;
+  userEmail: string;
+  userFullname: string;
+  confirmPassword: string;
+};
