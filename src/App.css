@@ -53,6 +53,15 @@ a:visited {
   text-transform: capitalize;
 }
 
+.active__link > svg {
+  color: #4f46e5;
+}
+
+.active__link > .link__name {
+  font-weight: 500;
+  color: #000;
+}
+
 .logo__header {
   font-size: 2rem;
   color: #4b5563;
@@ -219,6 +228,14 @@ select:focus {
   transition: none;
 }
 
+.users__section__main__header {
+  display: grid;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1.9fr 0.5fr 0.6fr;
+  column-gap: 2.4rem;
+  align-items: center;
+  transition: none;
+}
+
 .info__div {
   padding: 1.6rem 2.4rem;
   text-transform: uppercase;
@@ -237,6 +254,16 @@ select:focus {
   font-size: 1.4rem;
 }
 
+.user__list__item {
+  display: grid;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1.6fr 0.6fr 0.6fr;
+  column-gap: 2.4rem;
+  align-items: center;
+  transition: none;
+  padding: 1.2rem 2.4rem;
+  font-size: 1.4rem;
+}
+
 .cabin__img {
   display: block;
   width: 6.4rem;
@@ -246,7 +273,8 @@ select:focus {
   transform: scale(1.5) translateX(-7px);
 }
 
-.cabin__number {
+.cabin__number,
+.user__list__name {
   font-size: 1.6rem;
   font-weight: 600;
   color: #4b5563;
@@ -410,4 +438,11 @@ select:focus {
   border-radius: 0.5rem;
   padding: 0.8rem 1.2rem;
   width: 35rem;
+}
+
+.user__img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
 }

@@ -3,7 +3,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { MdOutlineCabin } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 function Sidebar() {
   const pages = [
     {
@@ -28,6 +28,8 @@ function Sidebar() {
     },
   ];
 
+  const location = useLocation();
+
   return (
     <aside className="sidebar">
       <div className="logo__div">
@@ -40,8 +42,12 @@ function Sidebar() {
       </div>
       <div className="sidebar__links">
         {pages.map((page) => {
+          const isActive = location.pathname === `/${page.name}`;
           return (
-            <Link to={page.name} className="sidebar__link">
+            <Link
+              to={page.name}
+              className={`sidebar__link ${isActive ? "active__link" : ""}`}
+            >
               {page.svg}
               <h5 className="link__name">{page.name}</h5>
             </Link>
