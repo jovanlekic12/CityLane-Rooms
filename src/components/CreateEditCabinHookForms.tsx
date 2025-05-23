@@ -35,9 +35,11 @@ const CreateEditCabinHookForm = ({
     <div className="form__overlay">
       <form className="cabin__form" onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
-          <FormBlock
+          <FormBlock<Cabin>
             key={field.name}
-            {...field}
+            name={field.name as keyof Cabin}
+            label={field.label}
+            type={field.type}
             register={register}
             errors={errors}
           />

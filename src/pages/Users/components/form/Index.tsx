@@ -4,6 +4,7 @@ import Button from "../../../../components/Button";
 import { newUser } from "../../../../utils/types";
 import { supabase } from "../../../../supabase/supabase";
 import { inserNewUser } from "../../../../API/users";
+import { useState } from "react";
 
 type FormProps = {
   setIsFormOpened: (isOpened: boolean) => void;
@@ -15,6 +16,8 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<newUser>();
+
+  const [validationError, setValidationError] = useState<null | string>(null);
 
   const fields = [
     { name: "fullName", label: "Full name", type: "test" },
@@ -42,11 +45,16 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
     <div className="form__overlay">
       <form className="user__form" onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
-          <FormBlock
+          <FormBlock<newUser>
             key={field.name}
-            {...field}
+            name={field.name as keyof newUser}
+            label={field.label}
+            type={field.type}
+            value={field?.minLength?.value}
+            minMessage={field?.minLength?.minMessage}
             register={register}
             errors={errors}
+            validationError={validationError}
           />
         ))}
         <div className="form__buttons__div">

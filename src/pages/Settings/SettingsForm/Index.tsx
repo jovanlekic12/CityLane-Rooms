@@ -66,9 +66,13 @@ function SettingsForm({ settings }: FormProps) {
   return (
     <form className="settings__form" onSubmit={handleSubmit(onSubmit)}>
       {fields.map((field) => (
-        <FormBlock
+        <FormBlock<SettingsType>
           key={field.name}
-          {...field}
+          name={field.name as keyof SettingsType}
+          label={field.label}
+          type={field.type}
+          value={field.value}
+          minMessage={field.minMessage}
           register={register}
           errors={errors}
         />
