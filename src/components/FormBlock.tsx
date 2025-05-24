@@ -24,7 +24,6 @@ function FormBlock<T extends FieldValues>({
   errors,
   value,
   minMessage,
-  validationError,
 }: FormBlockProps<T>) {
   const validationRules = {
     required: `${label} is required`,

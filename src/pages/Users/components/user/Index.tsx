@@ -18,8 +18,8 @@ export default function User({ email, id, created_at }: UserProps) {
     <div className="user__list__item">
       <img
         className="user__img"
-        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/cabin-photos//${id}.jpg`}
-        alt=""
+        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//${id}.jpg`}
+        alt="user photo"
       />
       <div className="user__list__name">demo</div>
       <div className="user__list__name">{email}</div>
