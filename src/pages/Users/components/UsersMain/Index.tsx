@@ -1,6 +1,7 @@
 import { useFetchData } from "../../../../API/useFetchData";
 import { getAllUsers } from "../../../../API/users";
 import Button from "../../../../components/Button";
+import Loader from "../../../../components/Loader";
 import User from "../user/Index";
 
 type Props = {
@@ -20,8 +21,7 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
           return <div className="info__div">{info}</div>;
         })}
       </header>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error loading users</p>}
+      {isLoading && <Loader />}
       <ul>
         {users?.length > 0
           ? users.map((user) => {

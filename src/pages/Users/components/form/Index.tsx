@@ -31,13 +31,9 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
         minMessage: "Password should be at least 6 characters",
       },
     },
-    { name: "confirmPassword", label: "Confirm password", type: "text" },
   ];
 
   async function onSubmit(data: newUser) {
-    if (data.confirmPassword !== data.userPassword) {
-      console.log("kurac");
-    }
     const { error } = await inserNewUser(data);
   }
 
