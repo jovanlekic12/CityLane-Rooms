@@ -17,9 +17,20 @@ export async function inserNewUser({
     password: userPassword,
     options: {
       data: {
-        fullName: userFullname,
+        name: userFullname,
       },
     },
   });
   return { error };
+}
+
+export async function getUser() {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
 }

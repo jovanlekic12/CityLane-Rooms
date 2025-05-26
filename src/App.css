@@ -109,6 +109,45 @@ a:visited {
   gap: 3.2rem;
 }
 
+.header {
+  padding: 1.2rem 4.8rem;
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header__user__div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__user__img {
+  width: 3.6rem;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50%;
+}
+
+.header__span {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #4b5563;
+}
+
+.header__options__div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.navbar__svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  color: #4f46e5;
+  stroke-width: 0.5px;
+}
 .section__header {
   display: flex;
   justify-content: space-between;
@@ -161,6 +200,10 @@ a:visited {
   font-size: 2rem;
 
   color: #4b5563;
+}
+
+.btn-ghost {
+  background-color: transparent;
 }
 
 .btn-options:focus {
