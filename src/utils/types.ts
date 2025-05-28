@@ -1,4 +1,4 @@
-import { User } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 import { Dispatch, SetStateAction } from "react";
 
 export type Cabin = {
@@ -18,8 +18,7 @@ export type SettingsType = {
 };
 
 export type LogInFormProps = {
-  setToken: Dispatch<SetStateAction<string | null>>;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  setToken: Dispatch<SetStateAction<Token | null>>;
 };
 
 export type newUser = {
@@ -30,5 +29,10 @@ export type newUser = {
 };
 
 export type UserProps = {
+  token: Token | null;
+};
+
+export type Token = {
   user: User | null;
+  session: Session | null;
 };

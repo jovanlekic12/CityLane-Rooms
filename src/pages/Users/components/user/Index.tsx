@@ -26,7 +26,7 @@ export default function User({ email, id, created_at, name }: UserProps) {
             "https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//default-avatar.jpg";
         }}
       />
-      <div className="user__list__name">{name ? name : "demo"}</div>
+      <div className="user__list__name">{name}</div>
       <div className="user__list__name">{email}</div>
       <div className="user__list__name">{formattedDate}</div>
     </div>

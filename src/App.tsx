@@ -6,11 +6,10 @@ import Settings from "./pages/Settings/Index";
 import { useEffect, useState } from "react";
 import LogInPage from "./pages/LogIn/Index";
 import Users from "./pages/Users/Index";
-import { User } from "@supabase/supabase-js";
+import { Token } from "./utils/types";
 
 function App() {
-  const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<Token | null>(null);
   if (token) {
     sessionStorage.setItem("token", JSON.stringify(token));
   }
@@ -19,19 +18,17 @@ function App() {
     const stored = sessionStorage.getItem("token");
     if (stored) {
       let data = JSON.parse(stored);
-      console.log(data.user, "token");
       setToken(data);
     }
   }, []);
 
+  console.log(sessionStorage);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          index
-          element={<LogInPage setToken={setToken} setUser={setUser} />}
-        />
-        <Route path="/" element={<Layout user={user} />}>
+        <Route index element={<LogInPage setToken={setToken} />} />
+        <Route path="/" element={<Layout token={token} />}>
           {token && <Route path="cabins" element={<Cabins />} />}
           {token && <Route path="settings" element={<Settings />} />}
           {token && <Route path="users" element={<Users />} />}

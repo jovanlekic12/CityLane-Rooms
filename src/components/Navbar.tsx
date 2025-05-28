@@ -3,7 +3,7 @@ import { CiUser } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 import { useNavigate } from "react-router";
 import { UserProps } from "../utils/types";
-function Navbar({ user }: UserProps) {
+function Navbar({ token }: UserProps) {
   const navigate = useNavigate();
 
   function handleLogout() {
@@ -11,14 +11,14 @@ function Navbar({ user }: UserProps) {
     navigate("/");
   }
 
-  console.log(user);
+  console.log(token);
 
   return (
     <header className="header">
-      {user && (
+      {token?.user && (
         <div className="header__user__div">
           <img
-            src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//${user.id}.jpg`}
+            src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//${token.user.id}.jpg`}
             alt="user avatar"
             className="header__user__img"
             onError={(e) => {
