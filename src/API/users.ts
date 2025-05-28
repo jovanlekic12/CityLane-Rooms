@@ -12,16 +12,19 @@ export async function inserNewUser({
   userEmail,
   userFullname,
 }: newUser) {
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: userEmail,
     password: userPassword,
     options: {
       data: {
-        name: userFullname,
+        fullName: userFullname,
       },
     },
   });
-  return { error };
+  return {
+    user: data?.user ?? null,
+    error,
+  };
 }
 
 export async function getUser() {

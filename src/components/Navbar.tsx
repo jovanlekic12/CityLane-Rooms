@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
-import { getUser } from "../API/users";
-import { User } from "@supabase/supabase-js";
 import Button from "./Button";
 import { CiUser } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 import { useNavigate } from "react-router";
-function Navbar() {
-  const [user, setUser] = useState<User | null | undefined>(null);
+import { UserProps } from "../utils/types";
+function Navbar({ user }: UserProps) {
   const navigate = useNavigate();
 
   function handleLogout() {
     sessionStorage.removeItem("token");
     navigate("/");
   }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const fetchedUser = await getUser();
-      setUser(fetchedUser);
-    };
-    fetchUser();
-  }, []);
 
   console.log(user);
 

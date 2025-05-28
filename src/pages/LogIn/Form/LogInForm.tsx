@@ -4,7 +4,7 @@ import { userEmail, userPassword } from "../../../utils/constants";
 import Button from "../../../components/Button";
 import { LogInFormProps } from "../../../utils/types";
 
-export default function LogInForm({ setToken }: LogInFormProps) {
+export default function LogInForm({ setToken, setUser }: LogInFormProps) {
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -14,6 +14,7 @@ export default function LogInForm({ setToken }: LogInFormProps) {
       console.error("Login failed:", error.message);
     } else {
       setToken(data.session?.access_token ?? null);
+      setUser(data.user);
       navigate("/cabins");
     }
   }

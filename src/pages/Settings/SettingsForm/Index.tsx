@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { SettingsType } from "../../../utils/types";
 import Button from "../../../components/Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../../../supabase/supabase";
 import FormBlock from "../../../components/FormBlock";
 
@@ -10,6 +10,8 @@ type FormProps = {
 };
 
 function SettingsForm({ settings }: FormProps) {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -24,12 +26,18 @@ function SettingsForm({ settings }: FormProps) {
   }, [settings, reset]);
 
   async function onSubmit(data: SettingsType) {
-    const { error } = await supabase
-      .from("settings")
-      .update(data)
-      .eq("id", 0)
-      .single();
-    if (error) throw error;
+    setLoading(true);
+    try {
+      const {} = await supabase
+        .from("settings")
+        .update(data)
+        .eq("id", 0)
+        .single();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const fields = [
@@ -77,7 +85,9 @@ function SettingsForm({ settings }: FormProps) {
           errors={errors}
         />
       ))}
-      <Button type="submit">Submit settings</Button>
+      <Button type="submit" disabled={loading}>
+        {loading ? "Uploading..." : "Submit settings"}
+      </Button>
     </form>
   );
 }

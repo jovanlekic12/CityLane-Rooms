@@ -14,8 +14,9 @@ export function useCabinForm(initialData: Cabin | null, onSuccess: () => void) {
   });
 
   const [img, setImg] = useState<File | null>(null);
-
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (data: Cabin) => {
+    setLoading(true);
     try {
       if (img) {
         if (initialData) {
@@ -33,10 +34,11 @@ export function useCabinForm(initialData: Cabin | null, onSuccess: () => void) {
       } else {
         await InsertNewCabin(data);
       }
-
       onSuccess();
     } catch (error) {
       console.error("Error handling form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,5 +48,6 @@ export function useCabinForm(initialData: Cabin | null, onSuccess: () => void) {
     errors,
     onSubmit,
     setImg,
+    loading,
   };
 }

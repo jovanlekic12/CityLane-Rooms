@@ -1,10 +1,13 @@
 import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-const Layout = () => {
+import { User } from "@supabase/supabase-js";
+import { UserProps } from "../utils/types";
+
+const Layout = ({ user }: UserProps) => {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <Sidebar></Sidebar>
       <Outlet></Outlet>
     </>

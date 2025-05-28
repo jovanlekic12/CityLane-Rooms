@@ -2,7 +2,7 @@ import { useFetchData } from "../../../../API/useFetchData";
 import { getAllUsers } from "../../../../API/users";
 import Button from "../../../../components/Button";
 import Loader from "../../../../components/Loader";
-import User from "./user/Index";
+import User from "../user/Index";
 
 type Props = {
   setIsFormOpened: (isOpened: boolean) => void;
@@ -12,7 +12,7 @@ type Props = {
 export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
   const infos = ["", "name", "email", "created at"];
 
-  const { data: users, isLoading, error } = useFetchData(getAllUsers);
+  const { data: users, isLoading } = useFetchData(getAllUsers, isFormOpened);
 
   console.log(users);
 

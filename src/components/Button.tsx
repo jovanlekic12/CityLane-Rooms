@@ -4,6 +4,7 @@ type ButtonProps = {
   onClick?: () => void;
   isActive?: boolean;
   type?: string;
+  disabled?: boolean;
 };
 
 function Button({
@@ -11,6 +12,7 @@ function Button({
   onClick,
   type,
   isActive,
+  disabled,
 }: PropsWithChildren<ButtonProps>) {
   const rootClass = "btn";
 
@@ -23,7 +25,7 @@ function Button({
     .join(" ");
 
   return (
-    <button className={`${classes}`} onClick={onClick}>
+    <button disabled={disabled} className={`${classes}`} onClick={onClick}>
       {children}
     </button>
   );

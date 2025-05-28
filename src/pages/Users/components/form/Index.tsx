@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import FormBlock from "../../../../components/FormBlock";
 import Button from "../../../../components/Button";
 import { newUser } from "../../../../utils/types";
-import { supabase } from "../../../../supabase/supabase";
 import { inserNewUser } from "../../../../API/users";
 import { useState } from "react";
+import { supabase } from "../../../../supabase/supabase";
 
 type FormProps = {
   setIsFormOpened: (isOpened: boolean) => void;
@@ -17,15 +17,16 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
     formState: { errors },
   } = useForm<newUser>();
 
-  const [validationError, setValidationError] = useState<null | string>(null);
+  const [img, setImg] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const fields = [
-    { name: "fullName", label: "Full name", type: "test" },
+    { name: "userFullname", label: "Full name", type: "test" },
     { name: "userEmail", label: "Email address", type: "text" },
     {
       name: "userPassword",
       label: "Password (min 6 characters)",
-      type: "text",
+      type: "password",
       minLength: {
         value: 6,
         minMessage: "Password should be at least 6 characters",
@@ -34,7 +35,21 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
   ];
 
   async function onSubmit(data: newUser) {
-    const { error } = await inserNewUser(data);
+    setLoading(true);
+    const { user } = await inserNewUser(data);
+    if (img) {
+      try {
+        await supabase.storage
+          .from("user-photos")
+          .upload(`${user?.id}.jpg`, img);
+        console.log(user);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    setIsFormOpened(false);
   }
 
   return (
@@ -50,9 +65,16 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
             minMessage={field?.minLength?.minMessage}
             register={register}
             errors={errors}
-            validationError={validationError}
           />
         ))}
+        <div className="form__div">
+          <label className="form__label">User photo</label>
+          <input
+            type="file"
+            className="img__input"
+            onChange={(e) => setImg(e.target.files?.[0] || null)}
+          />
+        </div>
         <div className="form__buttons__div">
           <Button
             type="cancel"
@@ -62,7 +84,9 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
           >
             Cancel
           </Button>
-          <Button type="submit">Create new user</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? "Uploading..." : "Create new user"}
+          </Button>
         </div>
       </form>
     </div>

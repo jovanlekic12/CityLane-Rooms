@@ -1,3 +1,4 @@
+import { User } from "@supabase/supabase-js";
 import { Dispatch, SetStateAction } from "react";
 
 export type Cabin = {
@@ -18,6 +19,7 @@ export type SettingsType = {
 
 export type LogInFormProps = {
   setToken: Dispatch<SetStateAction<string | null>>;
+  setUser: Dispatch<SetStateAction<User | null>>;
 };
 
 export type newUser = {
@@ -25,4 +27,8 @@ export type newUser = {
   userEmail: string;
   userFullname: string;
   confirmPassword: string;
+};
+
+export type UserProps = {
+  user: User | null;
 };

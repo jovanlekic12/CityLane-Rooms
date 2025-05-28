@@ -18,10 +18,8 @@ const CreateEditCabinHookForm = ({
     setCabinForEdit(null);
   };
 
-  const { register, handleSubmit, errors, onSubmit, setImg } = useCabinForm(
-    initialData || null,
-    onSuccess
-  );
+  const { register, handleSubmit, errors, onSubmit, setImg, loading } =
+    useCabinForm(initialData || null, onSuccess);
 
   const fields = [
     { name: "name", type: "text", label: "Cabin name" },
@@ -62,7 +60,7 @@ const CreateEditCabinHookForm = ({
           >
             Cancel
           </Button>
-          <Button type="submit">
+          <Button type="submit" disabled={loading}>
             {initialData ? "Edit cabin" : "Create new cabin"}
           </Button>
         </div>
