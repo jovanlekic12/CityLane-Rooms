@@ -12,7 +12,6 @@ export const useClickOutside = (
       ref.current.parentElement !== el.parentElement
     ) {
       console.log(ref.current.parentElement, el.parentElement);
-      console.log("mjau");
       callback();
     }
   };
