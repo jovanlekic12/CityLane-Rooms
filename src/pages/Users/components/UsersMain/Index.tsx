@@ -1,7 +1,9 @@
+import { useSearchParams } from "react-router";
 import { useFetchData } from "../../../../API/useFetchData";
 import { getAllUsers } from "../../../../API/users";
 import Button from "../../../../components/Button";
 import Loader from "../../../../components/Loader";
+import { useCallback } from "react";
 import User from "../user/Index";
 
 type Props = {
@@ -12,7 +14,12 @@ type Props = {
 export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
   const infos = ["", "name", "email", "created at"];
 
-  const { data: users, isLoading } = useFetchData(getAllUsers, isFormOpened);
+  const [params] = useSearchParams();
+
+  const getUsers = useCallback(() => {
+    return getAllUsers(params);
+  }, [params]);
+  const { data: users, isLoading } = useFetchData(getUsers, isFormOpened);
 
   console.log(users);
 

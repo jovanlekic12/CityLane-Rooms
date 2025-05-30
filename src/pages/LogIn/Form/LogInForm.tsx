@@ -3,19 +3,26 @@ import { logInUser } from "../../../API/demoLogin";
 import { userEmail, userPassword } from "../../../utils/constants";
 import Button from "../../../components/Button";
 import { LogInFormProps } from "../../../utils/types";
+import { useState } from "react";
 
 export default function LogInForm({ setToken }: LogInFormProps) {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    setLoading(true);
     e.preventDefault();
-    const { data, error } = await logInUser({ userEmail, userPassword });
-    if (error) {
-      console.error("Login failed:", error.message);
-    } else {
-      console.log(data);
-      setToken(data);
-      navigate("/cabins");
+    try {
+      const { data, error } = await logInUser({ userEmail, userPassword });
+      if (error) {
+        console.error("Login failed:", error.message);
+      } else {
+        setToken(data);
+        navigate("cabins");
+      }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -29,7 +36,9 @@ export default function LogInForm({ setToken }: LogInFormProps) {
         <label className="login__label">Password</label>
         <input type="password" defaultValue={userPassword} readOnly />
       </div>
-      <Button type="submit">Log In DEMO</Button>
+      <Button type="submit" disabled={loading}>
+        {loading ? "Loging in..." : "Log in DEMO"}
+      </Button>
     </form>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../../../components/Button";
 import { useNavigate, useSearchParams } from "react-router";
 
-function CabinsHeader() {
+export default function BookingsHeader() {
   const [activeBtn, setActiveBtn] = useState<string>("all");
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -23,27 +23,27 @@ function CabinsHeader() {
     } else {
       newParams.delete(name);
     }
+
     navigate({ search: newParams.toString() });
   };
 
   const filters = [
     { label: "All", value: "all" },
-    { label: "No discount", value: "no-discount" },
-    { label: "With discount", value: "discount" },
+    { label: "Checked out", value: "checked-out" },
+    { label: "Checked in", value: "checked-in" },
+    { label: "Unconfirmed", value: "unconfirmed" },
   ];
 
   const sorts = [
-    { label: "Sort by name (A-Z)", value: "name-asc" },
-    { label: "Sort by name (Z-A)", value: "name-desc" },
-    { label: "Sort by price (low first)", value: "price-asc" },
-    { label: "Sort by price (high first)", value: "price-desc" },
-    { label: "Sort by capacity (low first)", value: "capacity-asc" },
-    { label: "Sort by capacity (high first)", value: "capacity-desc" },
+    { label: "Sort by date (earlier first)", value: "startDate-asc" },
+    { label: "Sort by date (recent first)", value: "startDate-desc" },
+    { label: "Sort by amount (low first)", value: "totalPrice-asc" },
+    { label: "Sort by amount (high first)", value: "totalPrice-desc" },
   ];
 
   return (
     <div className="section__header">
-      <h1 className="section__heading">All cabins</h1>
+      <h1 className="section__heading">All bookings</h1>
       <div className="section__header__right">
         {filters.map((filter) => (
           <Button
@@ -51,7 +51,7 @@ function CabinsHeader() {
             type="filter"
             isActive={activeBtn === filter.value}
             onClick={() => {
-              handleFilterChange(filter.value, "discount");
+              handleFilterChange(filter.value, "status");
               setActiveBtn(filter.value);
             }}
           >
@@ -61,6 +61,7 @@ function CabinsHeader() {
 
         <select
           className="section__header__sort"
+          value={sorts[0].value}
           onChange={(e) => handleSortChange(e.target.value, "sortBy")}
         >
           {sorts.map((sort) => (
@@ -73,5 +74,3 @@ function CabinsHeader() {
     </div>
   );
 }
-
-export default CabinsHeader;
