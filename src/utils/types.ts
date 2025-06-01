@@ -36,3 +36,16 @@ export type Token = {
   user: User | null;
   session: Session | null;
 };
+
+export type Booking = {
+  id: string;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  cabinId: number;
+  guestId: number;
+  hasBreakfast: boolean;
+  observations: string;
+  isPaid: boolean;
+  numGuests: number;
+};

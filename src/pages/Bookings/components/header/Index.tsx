@@ -58,10 +58,8 @@ export default function BookingsHeader() {
             {filter.label}
           </Button>
         ))}
-
         <select
           className="section__header__sort"
-          value={sorts[0].value}
           onChange={(e) => handleSortChange(e.target.value, "sortBy")}
         >
           {sorts.map((sort) => (

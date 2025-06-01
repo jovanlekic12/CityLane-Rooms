@@ -1,3 +1,4 @@
+import BookingsMain from "./components/BookingsMain/Index";
 import BookingsHeader from "./components/header/Index";
 
 export default function Bookings() {
@@ -5,6 +6,7 @@ export default function Bookings() {
     <main className="main__container">
       <section className="section">
         <BookingsHeader />
+        <BookingsMain />
       </section>
     </main>
   );

@@ -27,7 +27,11 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
     <section className="section__main">
       <header className="users__section__main__header">
         {infos.map((info) => {
-          return <div className="info__div">{info}</div>;
+          return (
+            <div key={info} className="info__div">
+              {info}
+            </div>
+          );
         })}
       </header>
       {isLoading && <Loader />}
@@ -36,6 +40,7 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
           ? users.map((user) => {
               return (
                 <User
+                  key={user.id}
                   id={user.id}
                   email={user.email}
                   created_at={user.created_at}

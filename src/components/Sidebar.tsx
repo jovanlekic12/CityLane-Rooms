@@ -45,6 +45,7 @@ function Sidebar() {
           const isActive = location.pathname === `/${page.name}`;
           return (
             <Link
+              key={page.name}
               to={page.name}
               className={`sidebar__link ${isActive ? "active__link" : ""}`}
             >

@@ -30,7 +30,11 @@ function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
     <div className="section__main">
       <header className="section__main__header">
         {infos.map((info) => {
-          return <div className="info__div">{info}</div>;
+          return (
+            <div key={info} className="info__div">
+              {info}
+            </div>
+          );
         })}
       </header>
       {isLoading ? (
@@ -40,6 +44,7 @@ function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
           {cabins.map((cabin) => {
             return (
               <CabinItem
+                key={cabin.id}
                 cabin={cabin}
                 setIsFormOpened={setIsFormOpened}
                 setCabinForEdit={setCabinForEdit}

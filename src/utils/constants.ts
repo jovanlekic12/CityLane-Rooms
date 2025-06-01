@@ -1,2 +1,3 @@
 export const userEmail = "demo@example.com";
 export const userPassword = "demo12345";
+export const bookingsPerPage = 9;
