@@ -1,24 +1,29 @@
+import { isFuture, isPast, isToday } from "date-fns";
 import { supabase } from "../supabase/supabase";
 import { Booking } from "../utils/types";
+import { bookings } from "../data/data-bookings";
+import { cabins } from "../data/data-cabins";
+import { subtractDates } from "../utils/helpers";
+import { pricePerBreakfast } from "../utils/constants";
 
 export async function fetchBookings(
-  // params: URLSearchParams,
+  params: URLSearchParams,
   firstBookingIndex: number,
   lastBookingIndex: number
 ): Promise<Booking[]> {
   let query = supabase
     .from("bookings")
-    .select("*", { count: "exact" })
+    .select("*, cabins(name), guests(fullName, email)", { count: "exact" })
     .range(firstBookingIndex, lastBookingIndex);
 
-  // const status = params.get("status");
-  // if (status === "checked-out") {
-  //   query = query.gt("status", 0);
-  // } else if (status === "checked-in") {
-  //   query = query.eq("checked-in", 0);
-  // } else if (status === "unconfirmed") {
-  //   query = query.eq("dada", 0);
-  // }
+  const status = params.get("status");
+  if (status === "checked-out") {
+    query = query.eq("status", "Checked out");
+  } else if (status === "checked-in") {
+    query = query.eq("status", "Checked in");
+  } else if (status === "unconfirmed") {
+    query = query.eq("status", "Unconfirmed");
+  }
 
   // const sort = params.get("sortBy");
   // switch (sort) {
@@ -51,3 +56,51 @@ export async function fetchBookings(
 
   return data as Booking[];
 }
+
+export const createBookings = async () => {
+  try {
+    const finalBookings = bookings.map((booking) => {
+      const cabin = cabins.at(booking.cabinId - 1);
+      if (!cabin) return;
+      const numNights = subtractDates(booking.endDate, booking.startDate);
+      const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
+      const extrasPrice = booking.hasBreakfast
+        ? numNights * pricePerBreakfast * booking.numGuests
+        : 0;
+      const totalPrice = cabinPrice + extrasPrice;
+
+      let status;
+      if (
+        isPast(new Date(booking.endDate)) &&
+        !isToday(new Date(booking.endDate))
+      )
+        status = "Checked out";
+      if (
+        isFuture(new Date(booking.startDate)) ||
+        isToday(new Date(booking.startDate))
+      )
+        status = "Unconfirmed";
+      if (
+        (isFuture(new Date(booking.endDate)) ||
+          isToday(new Date(booking.endDate))) &&
+        isPast(new Date(booking.startDate)) &&
+        !isToday(new Date(booking.startDate))
+      )
+        status = "Checked in";
+
+      return {
+        ...booking,
+        numNights,
+        cabinPrice,
+        extrasPrice,
+        totalPrice,
+        status,
+      };
+    });
+
+    const { error } = await supabase.from("bookings").insert(finalBookings);
+    if (error) console.error(error.message);
+  } catch (error) {
+    console.error(error);
+  }
+};

@@ -48,4 +48,25 @@ export type Booking = {
   observations: string;
   isPaid: boolean;
   numGuests: number;
+  cabinName: string;
+  guests: {
+    email: string;
+    fullName: string;
+  };
+  status: string;
+  numNights: number;
+  totalPrice: number;
+  cabins: {
+    name: string;
+  };
+};
+
+export type GuestType = {
+  countryFlag: string;
+  created_at: string;
+  email: string;
+  fullName: string;
+  id: number;
+  nationalID: string;
+  nationality: string;
 };

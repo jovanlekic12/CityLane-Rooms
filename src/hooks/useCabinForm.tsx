@@ -22,11 +22,11 @@ export function useCabinForm(initialData: Cabin | null, onSuccess: () => void) {
         if (initialData) {
           await supabase.storage
             .from("cabin-photos")
-            .remove([`${data.id}.jpg`]);
+            .remove([`cabin-${data.id}.jpg`]);
         }
         await supabase.storage
           .from("cabin-photos")
-          .upload(`${data.id}.jpg`, img);
+          .upload(`cabin-${data.id}.jpg`, img);
       }
 
       if (initialData) {

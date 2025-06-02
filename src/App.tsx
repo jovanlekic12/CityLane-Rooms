@@ -8,6 +8,7 @@ import LogInPage from "./pages/LogIn/Index";
 import Users from "./pages/Users/Index";
 import { Token } from "./utils/types";
 import Bookings from "./pages/Bookings/Index";
+import { createBookings } from "./API/bookings";
 
 function App() {
   const [token, setToken] = useState<Token | null>(null);

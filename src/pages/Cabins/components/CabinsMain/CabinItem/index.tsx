@@ -35,7 +35,7 @@ function CabinItem({
   return (
     <li key={cabin.id} className="section__list__item">
       <img
-        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/cabin-photos//${cabin.id}.jpg`}
+        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/cabin-photos//cabin-${cabin.id}.jpg`}
         alt="cabin photo"
         className="cabin__img"
       />

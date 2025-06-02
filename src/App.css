@@ -265,7 +265,7 @@ select:focus {
 
 .section__main__header {
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 0fr;
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
@@ -289,12 +289,13 @@ select:focus {
 
 .section__list__item {
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.3fr 1.1fr 0.9fr 0.8fr;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 0fr;
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
-  padding: 1.2rem 2.4rem;
-  font-size: 1.4rem;
+  padding-left: 2.4rem;
+  padding-bottom: 1.2rem;
+  padding-top: 1.2rem;
 }
 
 .user__list__item {
@@ -317,7 +318,8 @@ select:focus {
 }
 
 .cabin__number,
-.user__list__name {
+.user__list__name,
+.booking__cabin {
   font-size: 1.6rem;
   font-weight: 600;
   color: #4b5563;
@@ -327,7 +329,8 @@ select:focus {
   font-weight: 300;
 }
 
-.cabin__price {
+.cabin__price,
+.booking__totalprice {
   font-weight: 600;
 }
 
@@ -489,4 +492,62 @@ select:focus {
   height: 5rem;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.booking__list__item {
+  display: grid;
+  grid-template-columns: 0.6fr 1.7fr 2fr 1fr 1fr 0fr;
+  column-gap: 2.4rem;
+  align-items: center;
+  transition: none;
+  padding-left: 2.4rem;
+  padding-bottom: 1.2rem;
+  padding-top: 1.2rem;
+}
+
+.booking__guest__div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.booking__guest__div span:first-child {
+  font-weight: 500;
+}
+
+.booking__guest__div span:last-child {
+  font-size: 1.4rem;
+  color: #6b7280;
+}
+
+.booking__status {
+  width: fit-content;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+}
+
+.booking__Unconfirmed {
+  color: #0369a1;
+  background-color: #e0f2fe;
+}
+
+.out {
+  color: #374151;
+  background-color: #e5e7eb;
+}
+
+.in {
+  color: #15803d;
+  background-color: #dcfce7;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }
