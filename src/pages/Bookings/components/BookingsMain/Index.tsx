@@ -19,7 +19,19 @@ export default function BookingsMain() {
 
   const { data: bookings, isLoading } = useFetchData(getBookings);
   console.log(bookings);
+
   const infos = ["Cabin", "Guest", "Dates", "Status", "Amount", ""];
+  const options = [
+    {
+      text: "See details",
+    },
+    {
+      text: "Check in",
+    },
+    {
+      text: "Delete booking",
+    },
+  ];
   return (
     <div className="section__main">
       <header className="section__main__header">
