@@ -1,7 +1,9 @@
 import { supabase } from "../supabase/supabase";
 import { Cabin } from "../utils/types";
 
-export async function fetchCabins(params: URLSearchParams): Promise<Cabin[]> {
+export async function fetchCabins(
+  params: URLSearchParams
+): Promise<{ data: Cabin[]; count: number | null }> {
   let query = supabase.from("cabins").select("*");
 
   const discount = params.get("discount");
@@ -33,14 +35,14 @@ export async function fetchCabins(params: URLSearchParams): Promise<Cabin[]> {
       break;
   }
 
-  const { data, error } = await query;
+  const { data, error, count } = await query;
 
   if (error) {
     console.error("Error fetching cabins:", error);
-    return [];
+    return { data: [], count: null };
   }
 
-  return data as Cabin[];
+  return { data: data as Cabin[], count };
 }
 
 export async function InsertNewCabin(cabin: Cabin) {

@@ -13,7 +13,7 @@ type Props = {
   isFormOpened: boolean;
 };
 
-function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
+function CabinsMain({ setIsFormOpened, setCabinForEdit }: Props) {
   const infos = ["", "Cabin", "Capacity", "Price", "Discount", ""];
 
   const [params] = useSearchParams();
@@ -21,10 +21,12 @@ function CabinsMain({ setIsFormOpened, setCabinForEdit, isFormOpened }: Props) {
   const getCabins = useCallback(() => {
     return fetchCabins(params);
   }, [params]);
-  const { data: cabins, isLoading } = useFetchData<Cabin>(
-    getCabins,
-    isFormOpened
-  );
+  const { data, isLoading } = useFetchData<{
+    data: Cabin[];
+    count: number | null;
+  }>(getCabins);
+
+  const cabins = data?.data ?? [];
 
   return (
     <div className="section__main">

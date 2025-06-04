@@ -10,7 +10,7 @@ export async function fetchBookings(
   params: URLSearchParams,
   firstBookingIndex: number,
   lastBookingIndex: number
-): Promise<Booking[]> {
+): Promise<{ data: Booking[]; count: number | null }> {
   let query = supabase
     .from("bookings")
     .select("*, cabins(name), guests(fullName, email)", { count: "exact" })
@@ -47,14 +47,14 @@ export async function fetchBookings(
   //     break;
   // }
 
-  const { data, error } = await query;
+  const { data, error, count } = await query;
 
   if (error) {
     console.error("Error fetching bookings:", error);
-    return [];
+    return { data: [], count: null };
   }
 
-  return data as Booking[];
+  return { data: data as Booking[], count };
 }
 
 export const createBookings = async () => {

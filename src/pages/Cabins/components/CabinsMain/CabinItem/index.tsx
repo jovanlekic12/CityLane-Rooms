@@ -54,7 +54,7 @@ function CabinItem({
             setShowDialog(true);
           }}
         >
-          0
+          ⋮
         </Button>
         {showDialog && (
           <Dialog

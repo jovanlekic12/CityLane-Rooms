@@ -12,6 +12,7 @@ html {
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
+  height: calc(-55px + 100vh);
 }
 
 .sidebar {
@@ -193,12 +194,12 @@ a:visited {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 0.5rem;
   transition: 0.2s;
   position: relative;
   font-size: 2rem;
-
   color: #4b5563;
 }
 
@@ -232,6 +233,28 @@ a:visited {
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
 }
+
+.btn-pagination {
+  font-weight: 500;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  transition: 0.3s;
+  border-radius: 0.5rem;
+}
+
+.btn-pagination svg {
+  font-size: 1.8rem;
+}
+
+.btn-pagination:hover {
+  background-color: #4338ca;
+  color: #fff;
+}
+
 .section__header__right {
   display: flex;
   align-items: center;
@@ -541,6 +564,26 @@ select:focus {
 .in {
   color: #15803d;
   background-color: #dcfce7;
+}
+
+.bookings__counter {
+  color: #374151;
+}
+
+.bookings__counter span {
+  font-weight: 600;
+}
+
+.bookings__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagination__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 @keyframes loading {

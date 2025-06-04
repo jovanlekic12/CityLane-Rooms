@@ -2,7 +2,11 @@ import { useState } from "react";
 import Button from "../../../../components/Button";
 import { useNavigate, useSearchParams } from "react-router";
 
-export default function BookingsHeader() {
+type Props = {
+  setCurrentPage: (number: number) => void;
+};
+
+export default function BookingsHeader({ setCurrentPage }: Props) {
   const [activeBtn, setActiveBtn] = useState<string>("all");
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -23,8 +27,8 @@ export default function BookingsHeader() {
     } else {
       newParams.delete(name);
     }
-
     navigate({ search: newParams.toString() });
+    setCurrentPage(1);
   };
 
   const filters = [

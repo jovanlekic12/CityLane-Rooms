@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 export function useFetchData<T>(
-  fetchHandler: () => Promise<T[]>,
+  fetchHandler: () => Promise<T>,
   changer?: boolean
 ) {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<T | null>();
   const [error, setError] = useState<Error | null>(null);
-
+  const [count, setCount] = useState(0);
   useEffect(() => {
     let isMounted = true;
 
@@ -35,5 +35,5 @@ export function useFetchData<T>(
     };
   }, [fetchHandler, changer]);
 
-  return { isLoading, data, error };
+  return { isLoading, data, error, count };
 }

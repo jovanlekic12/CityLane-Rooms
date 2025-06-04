@@ -4,7 +4,8 @@ import { getAllUsers } from "../../../../API/users";
 import Button from "../../../../components/Button";
 import Loader from "../../../../components/Loader";
 import { useCallback } from "react";
-import User from "../user/Index";
+import UserListItem from "../user/Index";
+import { User } from "@supabase/supabase-js";
 
 type Props = {
   setIsFormOpened: (isOpened: boolean) => void;
@@ -19,9 +20,13 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
   const getUsers = useCallback(() => {
     return getAllUsers(params);
   }, [params]);
-  const { data: users, isLoading } = useFetchData(getUsers, isFormOpened);
+  const { data, isLoading } = useFetchData<{
+    data: User[];
+    count: number | null;
+  }>(getUsers);
 
-  console.log(users);
+  const users = data?.data ?? [];
+  const totalCount = data?.count ?? 0;
 
   return (
     <section className="section__main">
@@ -39,7 +44,7 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
         {users?.length > 0
           ? users.map((user) => {
               return (
-                <User
+                <UserListItem
                   key={user.id}
                   id={user.id}
                   email={user.email}

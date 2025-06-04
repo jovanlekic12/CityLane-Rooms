@@ -2,19 +2,21 @@ import { User } from "@supabase/supabase-js";
 import { supabase } from "../supabase/supabase";
 import { newUser } from "../utils/types";
 
-export async function getAllUsers(params: URLSearchParams): Promise<User[]> {
+export async function getAllUsers(
+  params: URLSearchParams
+): Promise<{ data: User[]; count: number | null }> {
   try {
     const { data: listResponse, error: listError } =
       await supabase.auth.admin.listUsers();
 
     if (listError) {
       console.error("Error listing users:", listError);
-      return [];
+      return { data: [], count: null };
     }
 
     let users: User[] = listResponse.users;
     const sort = params.get("sortBy");
-
+    const count = users.length;
     if (sort === "name-asc") {
       users = users.sort((a, b) => {
         const nameA = (a.user_metadata?.fullName || "").toLowerCase();
@@ -39,10 +41,10 @@ export async function getAllUsers(params: URLSearchParams): Promise<User[]> {
       );
     }
 
-    return users;
+    return { data: users as User[], count };
   } catch (err) {
     console.error("Unexpected error fetching users:", err);
-    return [];
+    return { data: [], count: null };
   }
 }
 

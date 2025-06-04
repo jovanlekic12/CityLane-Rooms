@@ -5,7 +5,12 @@ type UserProps = {
   name?: string;
 };
 
-export default function User({ email, id, created_at, name }: UserProps) {
+export default function UserListItem({
+  email,
+  id,
+  created_at,
+  name,
+}: UserProps) {
   const date = new Date(created_at);
   const formattedDate = date.toLocaleString("en-US", {
     year: "numeric",
