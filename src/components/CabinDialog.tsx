@@ -15,7 +15,7 @@ type DialogProps = {
   setCabinForEdit: (cabin: Cabin) => void;
 };
 
-export const Dialog = ({
+export const CabinDialog = ({
   onClickOutside,
   options,
   setIsFormOpened,

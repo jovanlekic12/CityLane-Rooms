@@ -393,10 +393,11 @@ select:focus {
   bottom: 0;
   left: 0;
   transform: translate(-100%, 100%);
+  width: fit-content;
 }
 
 .dialog__btn {
-  width: 100%;
+  width: max-content;
   text-align: left;
   border: none;
   padding: 1.2rem 2.4rem;

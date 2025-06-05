@@ -1,6 +1,11 @@
+import { useState } from "react";
 import Button from "../../../../../components/Button";
 import { formatDateShort, timeDifference } from "../../../../../utils/helpers";
 import { Booking } from "../../../../../utils/types";
+import { BookingDialog } from "../../../../../components/BookingDialog";
+import { IoMdEye } from "react-icons/io";
+import { BiUpload } from "react-icons/bi";
+import { TiDelete } from "react-icons/ti";
 
 export default function BookingListItem({
   id,
@@ -12,6 +17,34 @@ export default function BookingListItem({
   endDate,
   totalPrice,
 }: Booking) {
+  const [showDialog, setShowDialog] = useState(false);
+
+  const checkedInOptions = [
+    {
+      text: "See details",
+      svg: <IoMdEye />,
+    },
+    {
+      text: status === "Unconfirmed" ? "Check in" : "Check out",
+      svg: <BiUpload />,
+    },
+    {
+      text: "Delete booking",
+      svg: <TiDelete />,
+    },
+  ];
+
+  const checkedOutOptions = [
+    {
+      text: "See details",
+      svg: <IoMdEye />,
+    },
+    {
+      text: "Delete booking",
+      svg: <TiDelete />,
+    },
+  ];
+
   return (
     <li className="booking__list__item" key={id}>
       <div className="booking__cabin">{cabins.name}</div>
@@ -38,7 +71,24 @@ export default function BookingListItem({
         })}
         $
       </div>
-      <Button type="options">⋮</Button>
+      <div className="options-btn-div">
+        <Button
+          type="options"
+          onClick={() => {
+            setShowDialog(true);
+          }}
+        >
+          ⋮
+        </Button>
+        {showDialog && (
+          <BookingDialog
+            onClickOutside={() => setShowDialog(false)}
+            options={
+              status === "Checked out" ? checkedOutOptions : checkedInOptions
+            }
+          />
+        )}
+      </div>
     </li>
   );
 }

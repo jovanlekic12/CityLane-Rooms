@@ -1,7 +1,7 @@
 import Button from "../../../../../components/Button";
 import { Cabin } from "../../../../../utils/types";
 import { useState } from "react";
-import { Dialog } from "../../../../../components/Dialog";
+import { CabinDialog } from "../../../../../components/CabinDialog";
 import { IoCopy, IoPencil } from "react-icons/io5";
 import { TiDelete } from "react-icons/ti";
 
@@ -57,7 +57,7 @@ function CabinItem({
           ⋮
         </Button>
         {showDialog && (
-          <Dialog
+          <CabinDialog
             onClickOutside={() => setShowDialog(false)}
             options={options}
             setIsFormOpened={setIsFormOpened}

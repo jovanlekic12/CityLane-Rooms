@@ -7,7 +7,6 @@ export function useFetchData<T>(
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<T | null>();
   const [error, setError] = useState<Error | null>(null);
-  const [count, setCount] = useState(0);
   useEffect(() => {
     let isMounted = true;
 
@@ -35,5 +34,5 @@ export function useFetchData<T>(
     };
   }, [fetchHandler, changer]);
 
-  return { isLoading, data, error, count };
+  return { isLoading, data, error };
 }

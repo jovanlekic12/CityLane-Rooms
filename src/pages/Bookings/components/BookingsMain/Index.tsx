@@ -32,17 +32,7 @@ export default function BookingsMain({ setCurrentPage, currentPage }: Props) {
   const totalCount = data?.count ?? 0;
   console.log(firstBookingIndex);
   const infos = ["Cabin", "Guest", "Dates", "Status", "Amount", ""];
-  const options = [
-    {
-      text: "See details",
-    },
-    {
-      text: "Check in",
-    },
-    {
-      text: "Delete booking",
-    },
-  ];
+
   return (
     <div className="section__main">
       <header className="section__main__header">
