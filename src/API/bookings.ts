@@ -25,27 +25,21 @@ export async function fetchBookings(
     query = query.eq("status", "Unconfirmed");
   }
 
-  // const sort = params.get("sortBy");
-  // switch (sort) {
-  //   case "name-asc":
-  //     query = query.order("name", { ascending: true });
-  //     break;
-  //   case "name-desc":
-  //     query = query.order("name", { ascending: false });
-  //     break;
-  //   case "price-asc":
-  //     query = query.order("price", { ascending: true });
-  //     break;
-  //   case "price-desc":
-  //     query = query.order("price", { ascending: false });
-  //     break;
-  //   case "capacity-asc":
-  //     query = query.order("capacity", { ascending: true });
-  //     break;
-  //   case "capacity-desc":
-  //     query = query.order("capacity", { ascending: false });
-  //     break;
-  // }
+  const sort = params.get("sortBy");
+  switch (sort) {
+    case "startDate-asc":
+      query = query.order("startDate", { ascending: true });
+      break;
+    case "StartDate-desc":
+      query = query.order("startDate", { ascending: false });
+      break;
+    case "totalPrice-asc":
+      query = query.order("totalPrice", { ascending: true });
+      break;
+    case "totalPrice-desc":
+      query = query.order("totalPrice", { ascending: false });
+      break;
+  }
 
   const { data, error, count } = await query;
 
