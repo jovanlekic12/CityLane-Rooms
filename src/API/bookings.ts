@@ -98,3 +98,25 @@ export const createBookings = async () => {
     console.error(error);
   }
 };
+
+export async function fetchSingleBooking(
+  id: string | undefined
+): Promise<Booking | undefined> {
+  try {
+    const { data, error } = await supabase
+      .from("bookings")
+      .select("*,cabins(name),guests(fullName,email,countryFlag,nationalID)")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return undefined;
+    }
+
+    return data;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+}

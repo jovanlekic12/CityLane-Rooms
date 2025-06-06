@@ -149,17 +149,25 @@ a:visited {
   color: #4f46e5;
   stroke-width: 0.5px;
 }
-.section__header {
+.section__header,
+.booking__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.section__heading {
+.section__heading,
+.booking__header__name {
   font-size: 3.4rem;
   font-weight: 600;
   line-height: 1.4;
   color: #374151;
+}
+
+.booking__header__div {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .btn {
@@ -585,6 +593,51 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.singlebooking__main__header {
+  padding: 2rem 4rem;
+  color: rgb(224, 231, 255);
+  font-size: 1.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6366f1;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.singlebooking__info__section {
+  padding: 3.2rem 4rem 1.2rem;
+}
+
+.number__nights__div {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.cabin__icon {
+  font-size: 3rem;
+}
+
+.single__booking__flag {
+  max-width: 2rem;
+}
+
+.singlebooking__guest__div {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.6rem;
+  color: #6b7280;
+}
+.singlebooking__guest__name {
+  font-weight: 500;
+  color: #374151;
 }
 
 @keyframes loading {

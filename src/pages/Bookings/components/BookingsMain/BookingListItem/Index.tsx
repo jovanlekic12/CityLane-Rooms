@@ -86,6 +86,7 @@ export default function BookingListItem({
             options={
               status === "Checked out" ? checkedOutOptions : checkedInOptions
             }
+            id={id}
           />
         )}
       </div>
