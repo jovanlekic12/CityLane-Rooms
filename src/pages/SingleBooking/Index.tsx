@@ -4,6 +4,8 @@ import { fetchSingleBooking } from "../../API/bookings";
 import { useFetchData } from "../../API/useFetchData";
 import SingleBookingHeader from "./components/header/Index";
 import SingleBookingMain from "./components/main/Index";
+import { Slide, ToastContainer } from "react-toastify";
+import Loader from "../../components/Loader";
 
 export default function SingleBooking() {
   let params = useParams();
@@ -16,13 +18,23 @@ export default function SingleBooking() {
   const { isLoading, data: booking } = useFetchData(getBooking);
 
   console.log(booking);
-
   return (
     <main className="main__container">
+      {isLoading && <Loader />}
       {booking && (
         <section className="section">
           <SingleBookingHeader {...booking} />
           <SingleBookingMain {...booking} />
+          <ToastContainer
+            toastClassName="custom-toast"
+            position="top-center"
+            progressClassName="custom-progress"
+            autoClose={3000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            transition={Slide}
+          />
         </section>
       )}
     </main>

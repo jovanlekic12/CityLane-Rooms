@@ -24,7 +24,11 @@ export const BookingDialog = ({ onClickOutside, options, id }: DialogProps) => {
     if (option === "See details") {
       navigate(`/booking/${id}`);
     }
+    if (option === "Check in" || "Check out") {
+      navigate(`/booking/${id}`);
+    }
     if (option === "Delete booking") {
+      toast("mjau");
     }
   }
 

@@ -142,8 +142,8 @@ export async function updateBookingStatus(id: string, newStatus: string) {
   } finally {
     toast(
       newStatus === "Checked in"
-        ? "Booking succesfully checked in"
-        : "Booking succesfully checked out"
+        ? "Booking succesfully checked in ✔"
+        : "Booking succesfully checked out ✔"
     );
   }
 }

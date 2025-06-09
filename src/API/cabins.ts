@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { supabase } from "../supabase/supabase";
 import { Cabin } from "../utils/types";
 
@@ -46,33 +47,47 @@ export async function fetchCabins(
 }
 
 export async function InsertNewCabin(cabin: Cabin) {
-  const {} = await supabase
-    .from("cabins")
-    .insert([
-      {
-        id: cabin.id,
-        name: cabin.name,
-        capacity: cabin.capacity,
-        price: cabin.price,
-        discount: cabin.discount,
-        description: cabin.description,
-      },
-    ])
-    .select();
+  try {
+    const {} = await supabase
+      .from("cabins")
+      .insert([
+        {
+          id: cabin.id,
+          name: cabin.name,
+          capacity: cabin.capacity,
+          price: cabin.price,
+          discount: cabin.discount,
+          description: cabin.description,
+        },
+      ])
+      .select();
+  } catch (error) {
+    console.log(error);
+    toast("Error adding new cabin");
+  } finally {
+    toast("New cabin successfully added");
+  }
 }
 
 export async function EditCabin(cabin: Cabin) {
-  const {} = await supabase
-    .from("cabins")
-    .update([
-      {
-        name: cabin.name,
-        capacity: cabin.capacity,
-        price: cabin.price,
-        discount: cabin.discount,
-        description: cabin.description,
-      },
-    ])
-    .eq("id", cabin.id)
-    .select();
+  try {
+    const {} = await supabase
+      .from("cabins")
+      .update([
+        {
+          name: cabin.name,
+          capacity: cabin.capacity,
+          price: cabin.price,
+          discount: cabin.discount,
+          description: cabin.description,
+        },
+      ])
+      .eq("id", cabin.id)
+      .select();
+  } catch (error) {
+    console.log(error);
+    toast(`Error edditing ${cabin.name} cabin`);
+  } finally {
+    toast(`Cabin ${cabin.name} information successfully edited`);
+  }
 }

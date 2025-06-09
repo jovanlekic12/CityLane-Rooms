@@ -11,6 +11,9 @@ import { AiOutlineDollarCircle } from "react-icons/ai";
 import Button from "../../../../components/Button";
 import { useNavigate } from "react-router";
 import { updateBookingStatus } from "../../../../API/bookings";
+import { createPortal } from "react-dom";
+import DeleteBookingModal from "../../../../components/DeleteBookingModal";
+import { useState } from "react";
 export default function SingleBookingMain({
   numNights,
   startDate,
@@ -28,14 +31,13 @@ export default function SingleBookingMain({
   id,
 }: Booking) {
   const navigate = useNavigate();
-
+  const [isModalOpened, setIsModalOpened] = useState(false);
   function handleCheck() {
     if (status === "Checked in") {
       updateBookingStatus(id, "Checked out");
       return;
     } else {
       updateBookingStatus(id, "Checked in");
-
       return;
     }
   }
@@ -124,11 +126,21 @@ export default function SingleBookingMain({
             {status === "Unconfirmed" ? "Check in" : "Check out"}
           </Button>
         )}
-        <Button type="delete">Delete booking</Button>
+        <Button type="delete" onClick={() => setIsModalOpened(true)}>
+          Delete booking
+        </Button>
         <Button type="back" onClick={() => navigate("/bookings")}>
           Back
         </Button>
       </footer>
+      {isModalOpened &&
+        createPortal(
+          <DeleteBookingModal
+            setIsModalOpened={setIsModalOpened}
+            bookingId={id}
+          />,
+          document.body
+        )}
     </div>
   );
 }
