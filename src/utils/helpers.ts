@@ -18,3 +18,16 @@ export function formatDateShort(dateString: string): string {
     })
     .replace(",", "");
 }
+
+export function formatDateWithTime(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}

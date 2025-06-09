@@ -5,7 +5,7 @@ import { bookings } from "../data/data-bookings";
 import { cabins } from "../data/data-cabins";
 import { subtractDates } from "../utils/helpers";
 import { pricePerBreakfast } from "../utils/constants";
-
+import { toast } from "react-toastify";
 export async function fetchBookings(
   params: URLSearchParams,
   firstBookingIndex: number,
@@ -118,5 +118,32 @@ export async function fetchSingleBooking(
   } catch (err) {
     console.log(err);
     return undefined;
+  }
+}
+
+export async function deleteSingleBooking(id: string) {
+  try {
+    const {} = await supabase.from("bookings").delete().eq("id", id);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    toast("Booking succesfully deleted");
+  }
+}
+
+export async function updateBookingStatus(id: string, newStatus: string) {
+  try {
+    const {} = await supabase
+      .from("bookings")
+      .update({ status: newStatus })
+      .eq("id", id);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    toast(
+      newStatus === "Checked in"
+        ? "Booking succesfully checked in"
+        : "Booking succesfully checked out"
+    );
   }
 }

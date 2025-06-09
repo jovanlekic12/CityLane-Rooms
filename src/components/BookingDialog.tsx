@@ -1,6 +1,7 @@
 import { ReactNode, useRef } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 type Option = {
   svg: ReactNode;
@@ -22,6 +23,8 @@ export const BookingDialog = ({ onClickOutside, options, id }: DialogProps) => {
   function handleOnClick(option: string) {
     if (option === "See details") {
       navigate(`/booking/${id}`);
+    }
+    if (option === "Delete booking") {
     }
   }
 

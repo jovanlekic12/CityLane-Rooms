@@ -61,6 +61,8 @@ export type Booking = {
   cabins: {
     name: string;
   };
+  cabinPrice: number;
+  extrasPrice: number;
 };
 
 export type GuestType = {
