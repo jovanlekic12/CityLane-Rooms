@@ -8,6 +8,7 @@ import Button from "../../../../components/Button";
 import { Booking } from "../../../../utils/types";
 import BookingListItem from "./BookingListItem/Index";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import Pagination from "../../../../components/Pagination";
 
 type Props = {
   currentPage: number;
@@ -51,33 +52,13 @@ export default function BookingsMain({ setCurrentPage, currentPage }: Props) {
         })}
       </ul>
       {totalCount > bookingsPerPage && (
-        <div className="bookings__pagination">
-          <p className="bookings__counter">
-            Showing <span>{firstBookingIndex + 1}</span> to{" "}
-            <span>{Math.min(lastBookingIndex + 1, totalCount)}</span> of{" "}
-            <span>{totalCount}</span> results
-          </p>
-
-          <div className="pagination__buttons">
-            <Button
-              type="pagination"
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-            >
-              <HiChevronLeft />
-              Previous
-            </Button>
-
-            <Button
-              type="pagination"
-              disabled={lastBookingIndex + 1 >= totalCount}
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-            >
-              Next
-              <HiChevronRight />
-            </Button>
-          </div>
-        </div>
+        <Pagination
+          firstIndex={firstBookingIndex}
+          lastIndex={lastBookingIndex}
+          totalCount={totalCount}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       )}
     </div>
   );
