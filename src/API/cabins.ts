@@ -3,9 +3,14 @@ import { supabase } from "../supabase/supabase";
 import { Cabin } from "../utils/types";
 
 export async function fetchCabins(
-  params: URLSearchParams
+  params: URLSearchParams,
+  firstCabinIndex: number,
+  lastCabinIndex: number
 ): Promise<{ data: Cabin[]; count: number | null }> {
-  let query = supabase.from("cabins").select("*");
+  let query = supabase
+    .from("cabins")
+    .select("*", { count: "exact" })
+    .range(firstCabinIndex, lastCabinIndex);
 
   const discount = params.get("discount");
   if (discount === "discount") {

@@ -22,7 +22,7 @@ export default function BookingsMain({ setCurrentPage, currentPage }: Props) {
 
   const getBookings = useCallback(() => {
     return fetchBookings(params, firstBookingIndex, lastBookingIndex);
-  }, [params, firstBookingIndex, lastBookingIndex]);
+  }, [params, currentPage]);
 
   const { data, isLoading } = useFetchData<{
     data: Booking[];

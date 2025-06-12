@@ -1,30 +1,14 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Button from "../../../../components/Button";
 import { useNavigate, useSearchParams } from "react-router";
+import FilterSortHeader from "../../../../components/Filter&Sort";
 
-function CabinsHeader() {
+type Props = {
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+};
+
+function CabinsHeader({ setCurrentPage }: Props) {
   const [activeBtn, setActiveBtn] = useState<string>("all");
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
-
-  const handleSortChange = (sort: string, name: string) => {
-    const newParams = new URLSearchParams(params.toString());
-    if (sort) {
-      newParams.set(name, sort);
-    } else {
-      newParams.delete(name);
-    }
-    navigate({ search: newParams.toString() });
-  };
-  const handleFilterChange = (filter: string, name: string) => {
-    const newParams = new URLSearchParams(params.toString());
-    if (filter) {
-      newParams.set(name, filter);
-    } else {
-      newParams.delete(name);
-    }
-    navigate({ search: newParams.toString() });
-  };
 
   const filters = [
     { label: "All", value: "all" },
@@ -42,35 +26,16 @@ function CabinsHeader() {
   ];
 
   return (
-    <div className="section__header">
-      <h1 className="section__heading">All cabins</h1>
-      <div className="section__header__right">
-        {filters.map((filter) => (
-          <Button
-            key={filter.value}
-            type="filter"
-            isActive={activeBtn === filter.value}
-            onClick={() => {
-              handleFilterChange(filter.value, "discount");
-              setActiveBtn(filter.value);
-            }}
-          >
-            {filter.label}
-          </Button>
-        ))}
-
-        <select
-          className="section__header__sort"
-          onChange={(e) => handleSortChange(e.target.value, "sortBy")}
-        >
-          {sorts.map((sort) => (
-            <option key={sort.value} value={sort.value}>
-              {sort.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+    <FilterSortHeader
+      filters={filters}
+      sorts={sorts}
+      heading="All cabins"
+      filterName="discount"
+      sortName="sortBy"
+      activeBtn={activeBtn}
+      setActiveBtn={setActiveBtn}
+      setCurrentPage={setCurrentPage}
+    />
   );
 }
 

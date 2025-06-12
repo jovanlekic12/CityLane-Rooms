@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
 import { useNavigate, useSearchParams } from "react-router";
+import FilterSortHeader from "../../../../components/Filter&Sort";
 
 type Props = {
   setCurrentPage: (number: number) => void;
@@ -46,33 +47,15 @@ export default function BookingsHeader({ setCurrentPage }: Props) {
   ];
 
   return (
-    <div className="section__header">
-      <h1 className="section__heading">All bookings</h1>
-      <div className="section__header__right">
-        {filters.map((filter) => (
-          <Button
-            key={filter.value}
-            type="filter"
-            isActive={activeBtn === filter.value}
-            onClick={() => {
-              handleFilterChange(filter.value, "status");
-              setActiveBtn(filter.value);
-            }}
-          >
-            {filter.label}
-          </Button>
-        ))}
-        <select
-          className="section__header__sort"
-          onChange={(e) => handleSortChange(e.target.value, "sortBy")}
-        >
-          {sorts.map((sort) => (
-            <option key={sort.value} value={sort.value}>
-              {sort.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+    <FilterSortHeader
+      filters={filters}
+      sorts={sorts}
+      heading="All cabins"
+      filterName="status"
+      sortName="sortBy"
+      activeBtn={activeBtn}
+      setActiveBtn={setActiveBtn}
+      setCurrentPage={setCurrentPage}
+    />
   );
 }
