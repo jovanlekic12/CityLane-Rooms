@@ -425,11 +425,11 @@ select:focus {
   bottom: 0;
   left: 0;
   transform: translate(-100%, 100%);
-  width: fit-content;
+  width: max-content;
 }
 
 .dialog__btn {
-  width: max-content;
+  width: 100%;
   text-align: left;
   border: none;
   padding: 1.2rem 2.4rem;

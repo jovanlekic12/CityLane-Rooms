@@ -1,4 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router";
+import FilterSortHeader from "../../../../components/Filter&Sort";
 
 export default function UsersHeader() {
   const [params] = useSearchParams();
@@ -22,20 +23,11 @@ export default function UsersHeader() {
   ];
 
   return (
-    <div className="section__header">
-      <h1 className="section__heading">All users</h1>
-      <div className="section__header__right">
-        <select
-          className="section__header__sort"
-          onChange={(e) => handleSortChange(e.target.value, "sortBy")}
-        >
-          {sorts.map((sort) => (
-            <option key={sort.value} value={sort.value}>
-              {sort.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+    <FilterSortHeader
+      sorts={sorts}
+      heading="All cabins"
+      filterName="discount"
+      sortName="sortBy"
+    />
   );
 }

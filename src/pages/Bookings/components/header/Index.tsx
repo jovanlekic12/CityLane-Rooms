@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "../../../../components/Button";
-import { useNavigate, useSearchParams } from "react-router";
+
 import FilterSortHeader from "../../../../components/Filter&Sort";
 
 type Props = {
@@ -9,28 +8,6 @@ type Props = {
 
 export default function BookingsHeader({ setCurrentPage }: Props) {
   const [activeBtn, setActiveBtn] = useState<string>("all");
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
-
-  const handleSortChange = (sort: string, name: string) => {
-    const newParams = new URLSearchParams(params.toString());
-    if (sort) {
-      newParams.set(name, sort);
-    } else {
-      newParams.delete(name);
-    }
-    navigate({ search: newParams.toString() });
-  };
-  const handleFilterChange = (filter: string, name: string) => {
-    const newParams = new URLSearchParams(params.toString());
-    if (filter) {
-      newParams.set(name, filter);
-    } else {
-      newParams.delete(name);
-    }
-    navigate({ search: newParams.toString() });
-    setCurrentPage(1);
-  };
 
   const filters = [
     { label: "All", value: "all" },
@@ -50,7 +27,7 @@ export default function BookingsHeader({ setCurrentPage }: Props) {
     <FilterSortHeader
       filters={filters}
       sorts={sorts}
-      heading="All cabins"
+      heading="All bookings"
       filterName="status"
       sortName="sortBy"
       activeBtn={activeBtn}
