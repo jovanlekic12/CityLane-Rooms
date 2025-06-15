@@ -56,7 +56,7 @@ export default function FilterSortHeader({
               type="filter"
               isActive={activeBtn === filter.value}
               onClick={() => {
-                handleFilterChange(filter.value, filterName);
+                handleFilterChange?.(filter.value, filterName);
                 setActiveBtn?.(filter.value);
               }}
             >

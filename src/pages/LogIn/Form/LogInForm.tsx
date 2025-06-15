@@ -19,7 +19,7 @@ export default function LogInForm({ setToken }: LogInFormProps) {
         console.error("Login failed:", error.message);
       } else {
         setToken(data);
-        navigate("cabins");
+        navigate("home");
       }
     } finally {
       setLoading(false);

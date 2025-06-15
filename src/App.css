@@ -814,6 +814,68 @@ select:focus {
   cursor: pointer;
 }
 
+.dashboard__main__header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stats__svg__div {
+  background-color: #e0f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.bookings__div {
+  color: #0369a1;
+}
+
+.sales__div {
+  color: #15803d;
+}
+
+.ins__div {
+  color: #4338ca;
+}
+
+.occupancy {
+  color: #a16207;
+}
+
+.rate__div {
+  background-color: #fef9c3;
+}
+
+.stats__name {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.stats__value {
+  font-size: 2.4rem;
+  line-height: 1;
+  font-weight: 500;
+  color: #374151;
+}
+
+.stats div svg {
+  width: 3rem;
+  height: 3rem;
+}
+
 @keyframes loading {
   from {
     transform: rotate(0turn);

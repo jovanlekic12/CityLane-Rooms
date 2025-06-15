@@ -74,3 +74,9 @@ export type GuestType = {
   nationalID: string;
   nationality: string;
 };
+
+export type StatisticsType = {
+  name: string;
+  value: number;
+  date_range: string;
+};
