@@ -10,3 +10,13 @@ export async function fetchGeneralStatistics(
     .eq("date_range", dateRange);
   return data ?? [];
 }
+
+export async function fetchCabinsStatistics(
+  dateRange: string
+): Promise<StatisticsType[]> {
+  const { data } = await supabase
+    .from("cabins-statistics")
+    .select("name,value")
+    .eq("date_range", dateRange);
+  return data ?? [];
+}

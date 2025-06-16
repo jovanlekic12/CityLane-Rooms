@@ -78,5 +78,4 @@ export type GuestType = {
 export type StatisticsType = {
   name: string;
   value: number;
-  date_range: string;
 };

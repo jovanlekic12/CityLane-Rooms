@@ -876,6 +876,77 @@ select:focus {
   height: 3rem;
 }
 
+.pie__chart__infos {
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.echarts-for-react {
+  width: 50 rem;
+}
+
+.pie__chart__main__div {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 5rem;
+  gap: 10rem;
+}
+
+.chart__name__div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart__name__div h5 {
+  font-size: 1.4rem;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.pie__chart__section {
+  margin-top: 5rem;
+}
+
+.chart__name__div p {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 500;
+  color: #374151;
+}
+
+.pie__chart__heading {
+  font-size: 2.4rem;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.pie__chart__hr {
+  transition: 0.5s ease;
+  border-radius: 1rem;
+  z-index: 99;
+  position: relative;
+}
+
+.chart__info__div {
+  position: relative;
+}
+
+.pie__chart__hr__shadow {
+  position: absolute;
+  top: 23px;
+  width: 50rem;
+  height: 4px;
+  background-color: #dddddd;
+  border-radius: 1rem;
+}
+
 @keyframes loading {
   from {
     transform: rotate(0turn);
