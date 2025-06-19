@@ -1,5 +1,5 @@
 import { supabase } from "../supabase/supabase";
-import { StatisticsType } from "../utils/types";
+import { LineStatType, StatisticsType } from "../utils/types";
 
 export async function fetchGeneralStatistics(
   dateRange: string
@@ -18,5 +18,10 @@ export async function fetchCabinsStatistics(
     .from("cabins-statistics")
     .select("name,value")
     .eq("date_range", dateRange);
+  return data ?? [];
+}
+
+export async function fetchChartStatistics(): Promise<LineStatType[]> {
+  const { data } = await supabase.from("chart-statistics").select("*");
   return data ?? [];
 }

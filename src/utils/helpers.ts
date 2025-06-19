@@ -1,4 +1,4 @@
-import { differenceInDays, format, formatDistance, parseISO } from "date-fns";
+import { differenceInDays, formatDistance, parseISO } from "date-fns";
 
 export const subtractDates = (dateStr1: string, dateStr2: string) =>
   differenceInDays(parseISO(String(dateStr1)), parseISO(String(dateStr2)));
@@ -30,4 +30,15 @@ export function formatDateWithTime(dateString: string) {
     minute: "2-digit",
     hour12: true,
   });
+}
+
+export function fromToday(daysToSubtract: number): string {
+  const today = new Date();
+  today.setDate(today.getDate() - daysToSubtract);
+
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "2-digit",
+  };
+  return today.toLocaleDateString("en-US", options);
 }

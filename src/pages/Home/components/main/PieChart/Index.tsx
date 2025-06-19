@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { fetchCabinsStatistics } from "../../../../../API/statistics";
 import { useFetchData } from "../../../../../API/useFetchData";
 import ReactECharts from "echarts-for-react";
+import Loader from "../../../../../components/Loader";
 type Props = {
   dateRange: string;
 };
@@ -72,6 +73,8 @@ const PieChart: React.FC<Props> = ({ dateRange }) => {
 
   return (
     <section className="pie__chart__section">
+      {isLoading && <Loader />}
+
       <h1 className="pie__chart__heading">
         Most visited cabins in {dateRange}
       </h1>

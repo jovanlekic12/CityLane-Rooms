@@ -79,3 +79,8 @@ export type StatisticsType = {
   name: string;
   value: number;
 };
+
+export type LineStatType = {
+  value: number;
+  day: number;
+};

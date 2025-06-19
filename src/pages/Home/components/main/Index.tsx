@@ -1,4 +1,5 @@
 import Header from "./header/Index";
+import LineChart from "./LineChart/Index";
 import PieChart from "./PieChart/Index";
 
 type Props = {
@@ -10,6 +11,7 @@ export default function HomeMain({ dateRange }: Props) {
     <div className="section__main">
       <Header dateRange={dateRange} />
       <PieChart dateRange={dateRange} />
+      <LineChart />
     </div>
   );
 }
