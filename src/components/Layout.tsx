@@ -5,11 +5,11 @@ import { UserProps } from "../utils/types";
 
 const Layout = ({ token }: UserProps) => {
   return (
-    <>
+    <div className="root">
       <Navbar token={token}></Navbar>
       <Sidebar></Sidebar>
       <Outlet></Outlet>
-    </>
+    </div>
   );
 };
 

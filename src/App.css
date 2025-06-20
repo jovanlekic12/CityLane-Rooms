@@ -8,7 +8,7 @@ html {
   padding: 0;
 }
 
-#root {
+.root {
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
@@ -499,8 +499,7 @@ select:focus {
 }
 
 .login__container {
-  margin: 5rem auto;
-  margin-left: 22rem;
+  margin: 20rem auto;
   width: 50rem;
   display: flex;
   flex-direction: column;

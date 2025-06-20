@@ -31,7 +31,7 @@ function Navbar({ token }: UserProps) {
       )}
       <div className="header__options__div">
         <Button type="ghost">
-          <CiUser className="navbar__svg" />
+          <CiUser className="navbar__svg" onClick={() => navigate("account")} />
         </Button>
         <Button type="ghost" onClick={handleLogout}>
           <CiLogout className="navbar__svg" />

@@ -11,6 +11,7 @@ import Bookings from "./pages/Bookings/Index";
 import { createBookings } from "./API/bookings";
 import SingleBooking from "./pages/SingleBooking/Index";
 import Home from "./pages/Home/Index";
+import Account from "./pages/Account/Index";
 
 function App() {
   const [token, setToken] = useState<Token | null>(null);
@@ -37,6 +38,9 @@ function App() {
           {token && <Route path="users" element={<Users />} />}
           {token && <Route path="bookings" element={<Bookings />} />}
           {token && <Route path="booking/:id" element={<SingleBooking />} />}
+          {token && (
+            <Route path="account" element={<Account token={token} />} />
+          )}
         </Route>
       </Routes>
     </BrowserRouter>
