@@ -58,7 +58,7 @@ export async function inserNewUser({
     password: userPassword,
     options: {
       data: {
-        fullName: userFullname,
+        FullName: userFullname,
       },
     },
   });

@@ -26,7 +26,9 @@ function Navbar({ token }: UserProps) {
                 "https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//default-avatar.jpg";
             }}
           />
-          <span className="header__span">User</span>
+          <span className="header__span">
+            {token.user.user_metadata.FullName}
+          </span>
         </div>
       )}
       <div className="header__options__div">

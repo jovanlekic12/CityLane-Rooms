@@ -27,6 +27,7 @@ function SettingsForm({ settings }: FormProps) {
 
   async function onSubmit(data: SettingsType) {
     setLoading(true);
+    console.log(data);
     try {
       const {} = await supabase
         .from("settings")

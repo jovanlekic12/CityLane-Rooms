@@ -12,7 +12,7 @@ type Props = {
   isFormOpened: boolean;
 };
 
-export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
+export default function UsersMain({ setIsFormOpened }: Props) {
   const infos = ["", "name", "email", "created at"];
 
   const [params] = useSearchParams();
@@ -26,7 +26,6 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
   }>(getUsers);
 
   const users = data?.data ?? [];
-  const totalCount = data?.count ?? 0;
 
   return (
     <section className="section__main">
@@ -49,7 +48,7 @@ export default function UsersMain({ setIsFormOpened, isFormOpened }: Props) {
                   id={user.id}
                   email={user.email}
                   created_at={user.created_at}
-                  name={user.user_metadata.fullName}
+                  name={user.user_metadata.FullName}
                 />
               );
             })

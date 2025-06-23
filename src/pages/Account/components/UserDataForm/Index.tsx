@@ -1,20 +1,17 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
 import { useForm } from "react-hook-form";
-import { User } from "@supabase/supabase-js";
-import { supabase } from "../../../../supabase/supabase";
-import { userEmail } from "../../../../utils/constants";
 import { UserProps } from "../../../../utils/types";
+import { UpdateUser, UpdateUserPicture } from "../../../../API/account";
+import { toast } from "react-toastify";
 
 export default function UserDataForm({ token }: UserProps) {
-  const [loading, setLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [img, setImg] = useState<File | null>(null);
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -23,10 +20,27 @@ export default function UserDataForm({ token }: UserProps) {
     },
   });
 
-  async function onSubmit(data: User) {}
+  async function onSubmit(data: {
+    userEmail: string | undefined;
+    userName: string;
+  }) {
+    setIsLoading(true);
+    try {
+      UpdateUser(data.userName);
+      if (img && token?.user?.id) {
+        await UpdateUserPicture(img, token?.user?.id);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+      toast("User succesfully updated");
+      console.log(token);
+    }
+  }
 
   return (
-    <form className="settings__form">
+    <form className="settings__form" onSubmit={handleSubmit(onSubmit)}>
       <div className="form__div">
         <label className="form__label">Email address</label>
         <input
@@ -58,8 +72,8 @@ export default function UserDataForm({ token }: UserProps) {
           onChange={(e) => setImg(e.target.files?.[0] || null)}
         />
       </div>
-      <Button type="submit" disabled={loading}>
-        {loading ? "Updating..." : "Update account"}
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? "Updating..." : "Update account"}
       </Button>
     </form>
   );
