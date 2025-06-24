@@ -11,14 +11,12 @@ export const useClickOutside = (
       !ref.current.contains(el) &&
       ref.current.parentElement !== el.parentElement
     ) {
-      console.log(ref.current.parentElement, el.parentElement);
       callback();
     }
   };
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
-
     return () => {
       document.removeEventListener("click", handleClick);
     };

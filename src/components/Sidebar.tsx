@@ -4,7 +4,21 @@ import { MdOutlineCabin } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router";
-function Sidebar() {
+import { LayoutProps } from "../utils/types";
+import Button from "./Button";
+import useIsSmallScreen from "../hooks/useIsSmallScreen";
+import { IoClose } from "react-icons/io5";
+import { useRef } from "react";
+import { useClickOutside } from "../hooks/useClickOutside";
+function Sidebar({ isSidebarOpened, setIsSidebarOpened }: LayoutProps) {
+  function onClickOutside() {
+    setIsSidebarOpened(false);
+  }
+
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, onClickOutside);
+
+  const isSmallScreen = useIsSmallScreen();
   const pages = [
     {
       name: "home",
@@ -31,7 +45,10 @@ function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="sidebar">
+    <aside
+      ref={ref}
+      className={isSidebarOpened ? "sidebar__mobile sidebar" : "sidebar"}
+    >
       <div className="logo__div">
         <img
           src="https://city-lane-rooms.vercel.app/assets/logo-N6oXZ67_.jpg"
@@ -55,6 +72,11 @@ function Sidebar() {
           );
         })}
       </div>
+      {isSmallScreen && (
+        <Button type="sidebar" onClick={() => setIsSidebarOpened(false)}>
+          <IoClose />
+        </Button>
+      )}
     </aside>
   );
 }

@@ -1,4 +1,6 @@
 import "./App.css";
+import "./index.css";
+
 import { BrowserRouter, Route, Routes } from "react-router";
 import Layout from "./components/Layout";
 import Cabins from "./pages/Cabins/Index";

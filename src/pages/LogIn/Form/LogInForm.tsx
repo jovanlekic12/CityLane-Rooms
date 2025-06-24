@@ -30,7 +30,12 @@ export default function LogInForm({ setToken }: LogInFormProps) {
     <form className="login__form" onSubmit={handleSubmit}>
       <div className="login__div">
         <label className="login__label">Email address</label>
-        <input type="text" defaultValue={userEmail} readOnly />
+        <input
+          type="text"
+          defaultValue={userEmail}
+          readOnly
+          className="readonly"
+        />
       </div>
       <div className="login__div">
         <label className="login__label">Password</label>

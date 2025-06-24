@@ -28,6 +28,12 @@ export type newUser = {
   confirmPassword: string;
 };
 
+export type LayoutProps = {
+  token: Token | null;
+  setIsSidebarOpened: (isOpened: boolean) => void;
+  isSidebarOpened: boolean;
+};
+
 export type UserProps = {
   token: Token | null;
 };

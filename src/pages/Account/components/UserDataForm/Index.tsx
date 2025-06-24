@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Button from "../../../../components/Button";
 import { useForm } from "react-hook-form";
-import { UserProps } from "../../../../utils/types";
 import { UpdateUser, UpdateUserPicture } from "../../../../API/account";
 import { toast } from "react-toastify";
+import { UserProps } from "../../../../utils/types";
 
 export default function UserDataForm({ token }: UserProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function UserDataForm({ token }: UserProps) {
           readOnly
           type="text"
           {...register("userEmail", { required: "User email is required" })}
-          className="form__input"
+          className="form__input readonly"
         />
         {errors.userEmail?.message && (
           <p className="form__err">{errors.userEmail?.message as string}</p>

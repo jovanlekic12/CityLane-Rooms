@@ -28,6 +28,12 @@ a:visited {
   text-decoration: none;
 }
 
+.readonly {
+  background-color: #e3f1f8;
+  color: #6e7b8e;
+  cursor: not-allowed;
+}
+
 .logo {
   width: 10rem;
   height: 10rem;
@@ -112,6 +118,9 @@ a:visited {
 
 .header {
   padding: 1.2rem 4.8rem;
+}
+
+.header__div {
   display: flex;
   gap: 2.4rem;
   align-items: center;
@@ -208,6 +217,21 @@ a:visited {
   transition: 0.2s;
   position: relative;
   font-size: 2rem;
+  color: #4b5563;
+}
+
+.btn-sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+  font-size: 3rem;
   color: #4b5563;
 }
 
