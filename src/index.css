@@ -31,3 +31,44 @@
     transform: translate(0, 0);
   }
 }
+
+@media (max-width: 1200px) {
+  .main__container {
+    max-width: 100rem;
+    overflow: visible;
+  }
+}
+@media (max-width: 1050px) {
+  .main__container {
+    max-width: 85rem;
+  }
+}
+
+@media (max-width: 913px) {
+  .main__container {
+    max-width: 75rem;
+  }
+}
+
+@media (max-width: 779px) {
+  .main__container {
+    max-width: 65rem;
+  }
+}
+
+@media (max-width: 581px) {
+  .main__container {
+    max-width: 55rem;
+  }
+}
+
+@media (max-width: 481px) {
+  .main__container {
+    max-width: 40rem;
+  }
+}
+@media (max-width: 417px) {
+  .main__container {
+    max-width: 34rem;
+  }
+}
