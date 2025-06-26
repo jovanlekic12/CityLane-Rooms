@@ -906,16 +906,17 @@ select:focus {
   gap: 1rem;
 }
 
-.echarts-for-react {
-  width: 50 rem;
-}
-
 .pie__chart__main__div {
   display: flex;
   align-items: center;
   margin: 0 auto;
   margin-top: 5rem;
   gap: 10rem;
+}
+
+.pie__chart {
+  width: 50rem;
+  height: 35rem;
 }
 
 .chart__name__div {

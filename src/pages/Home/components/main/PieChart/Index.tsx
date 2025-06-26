@@ -3,6 +3,7 @@ import { fetchCabinsStatistics } from "../../../../../API/statistics";
 import { useFetchData } from "../../../../../API/useFetchData";
 import ReactECharts from "echarts-for-react";
 import Loader from "../../../../../components/Loader";
+import useIsSmallScreen from "../../../../../hooks/useIsSmallScreen";
 type Props = {
   dateRange: string;
 };
@@ -14,10 +15,7 @@ const PieChart: React.FC<Props> = ({ dateRange }) => {
 
   const { data: stats, isLoading } = useFetchData(getStatistics);
   const total = stats?.reduce((sum, stat) => sum + stat.value, 0) ?? 0;
-
-  console.log(total);
-
-  console.log(stats);
+  const isSmallScreen = useIsSmallScreen(681);
 
   const colors = [
     "#1e1b4b",
@@ -42,9 +40,9 @@ const PieChart: React.FC<Props> = ({ dateRange }) => {
         text: `Ukupno\n${total}`,
         textAlign: "center",
         fill: "#374151",
-        fontSize: 20,
+        fontSize: isSmallScreen ? 15 : 20,
         fontWeight: "bold",
-        lineHeight: 25,
+        lineHeight: isSmallScreen ? 15 : 25,
       },
     },
     series: [
@@ -79,10 +77,7 @@ const PieChart: React.FC<Props> = ({ dateRange }) => {
         Most visited cabins in {dateRange}
       </h1>
       <div className="pie__chart__main__div">
-        <ReactECharts
-          option={options}
-          style={{ height: "350px", width: "500px" }}
-        />
+        <ReactECharts className="pie__chart" option={options} />
         <div className="pie__chart__infos">
           {stats?.map((stat, index) => {
             return (

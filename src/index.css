@@ -36,11 +36,33 @@
   .main__container {
     max-width: 100rem;
     overflow: visible;
+    padding: 0;
+  }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 40rem;
   }
 }
 @media (max-width: 1050px) {
   .main__container {
     max-width: 85rem;
+    margin: 0 auto;
+  }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 35rem;
+  }
+  .stats__svg__div {
+    width: 5rem;
+    height: 5rem;
+  }
+  .stats__name {
+    font-size: 1.1rem;
+  }
+  .stats__value {
+    font-size: 2rem;
   }
 }
 
@@ -48,23 +70,135 @@
   .main__container {
     max-width: 75rem;
   }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 37.5rem;
+  }
+  .pie__chart__main__div {
+    gap: 0;
+  }
+  .stats__svg__div {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .stats__name {
+    font-size: 1rem;
+  }
+  .stats__value {
+    font-size: 1.6rem;
+  }
 }
 
 @media (max-width: 779px) {
   .main__container {
     max-width: 65rem;
   }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 32.5rem;
+  }
+  .stats__svg__div {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .stats div svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  .stats__name {
+    font-size: 0.8rem;
+  }
+  .stats__value {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 681px) {
+  .main__container {
+    max-width: 55rem;
+  }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 27.5rem;
+  }
+  .dashboard__main__header {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+  }
+  .stats__svg__div {
+    width: 6rem;
+    height: 6rem;
+  }
+  .stats div svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  .stats__name {
+    font-size: 1.4rem;
+  }
+  .stats__value {
+    font-size: 2.2rem;
+  }
+  .chart__name__div p {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
 }
 
 @media (max-width: 581px) {
   .main__container {
-    max-width: 55rem;
+    max-width: 45rem;
+  }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 22.5rem;
   }
 }
 
 @media (max-width: 481px) {
   .main__container {
     max-width: 40rem;
+  }
+
+  .pie__chart__main__div {
+    flex-direction: column;
+  }
+  .pie__chart__infos,
+  .pie__chart,
+  .pie__chart__hr__shadow {
+    width: 40rem;
+  }
+  .stats__svg__div {
+    width: 5rem;
+    height: 5rem;
+  }
+  .stats div svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .stats__name {
+    font-size: 1.2rem;
+  }
+  .stats__value {
+    font-size: 2rem;
+  }
+  .chart__name__div p {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .section__heading,
+  .booking__header__name {
+    font-size: 2.5rem;
+  }
+  .btn-filter {
+    font-size: 1.2rem;
+  }
+  .pie__chart__heading {
+    font-size: 2rem;
   }
 }
 @media (max-width: 417px) {
