@@ -8,16 +8,12 @@ import { LayoutProps } from "../utils/types";
 import Button from "./Button";
 import useIsSmallScreen from "../hooks/useIsSmallScreen";
 import { IoClose } from "react-icons/io5";
-import { useRef } from "react";
-import { useClickOutside } from "../hooks/useClickOutside";
+import { useRef, useState } from "react";
+import { useClickSidebar } from "../hooks/useClickSidebar";
 function Sidebar({ isSidebarOpened, setIsSidebarOpened }: LayoutProps) {
-  function onClickOutside() {
-    setIsSidebarOpened(false);
-  }
-
   const ref = useRef<HTMLDivElement>(null);
-  useClickOutside(ref, onClickOutside);
 
+  useClickSidebar(ref, () => setIsSidebarOpened(false), isSidebarOpened);
   const isSmallScreen = useIsSmallScreen();
   const pages = [
     {
@@ -45,7 +41,7 @@ function Sidebar({ isSidebarOpened, setIsSidebarOpened }: LayoutProps) {
   const location = useLocation();
 
   return (
-    <aside
+    <div
       ref={ref}
       className={isSidebarOpened ? "sidebar__mobile sidebar" : "sidebar"}
     >
@@ -77,7 +73,7 @@ function Sidebar({ isSidebarOpened, setIsSidebarOpened }: LayoutProps) {
           <IoClose />
         </Button>
       )}
-    </aside>
+    </div>
   );
 }
 export default Sidebar;

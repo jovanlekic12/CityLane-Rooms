@@ -51,7 +51,7 @@ const LineChart: React.FC = () => {
           Most cabin views from {days[0]} to {days[6]}
         </h1>
       )}
-      <ReactECharts option={options} />
+      <ReactECharts option={options} className="line__chart" />
     </section>
   );
 };
