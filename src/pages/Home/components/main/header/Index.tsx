@@ -14,7 +14,7 @@ export default function Header({ dateRange }: Props) {
     return fetchGeneralStatistics(dateRange);
   }, [dateRange]);
 
-  const { data: stats, isLoading } = useFetchData(getStatistics);
+  const { data: stats } = useFetchData(getStatistics);
 
   return (
     <header className="dashboard__main__header">

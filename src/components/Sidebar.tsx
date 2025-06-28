@@ -8,7 +8,7 @@ import { LayoutProps } from "../utils/types";
 import Button from "./Button";
 import useIsSmallScreen from "../hooks/useIsSmallScreen";
 import { IoClose } from "react-icons/io5";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useClickSidebar } from "../hooks/useClickSidebar";
 function Sidebar({ isSidebarOpened, setIsSidebarOpened }: LayoutProps) {
   const ref = useRef<HTMLDivElement>(null);

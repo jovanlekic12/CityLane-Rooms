@@ -1,13 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { bookingsPerPage } from "../../../../utils/constants";
 import { fetchBookings } from "../../../../API/bookings";
 import { useFetchData } from "../../../../API/useFetchData";
 import { useSearchParams } from "react-router";
 import Loader from "../../../../components/Loader";
-import Button from "../../../../components/Button";
 import { Booking } from "../../../../utils/types";
 import BookingListItem from "./BookingListItem/Index";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import Pagination from "../../../../components/Pagination";
 
 type Props = {

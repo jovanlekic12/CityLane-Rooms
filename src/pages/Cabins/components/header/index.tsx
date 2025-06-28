@@ -1,6 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import Button from "../../../../components/Button";
-import { useNavigate, useSearchParams } from "react-router";
 import FilterSortHeader from "../../../../components/Filter&Sort";
 
 type Props = {
