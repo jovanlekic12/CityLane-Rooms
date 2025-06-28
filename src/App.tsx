@@ -10,7 +10,6 @@ import LogInPage from "./pages/LogIn/Index";
 import Users from "./pages/Users/Index";
 import { Token } from "./utils/types";
 import Bookings from "./pages/Bookings/Index";
-import { createBookings } from "./API/bookings";
 import SingleBooking from "./pages/SingleBooking/Index";
 import Home from "./pages/Home/Index";
 import Account from "./pages/Account/Index";
