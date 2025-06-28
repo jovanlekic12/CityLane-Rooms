@@ -6,6 +6,7 @@ import { BookingDialog } from "../../../../../components/BookingDialog";
 import { IoMdEye } from "react-icons/io";
 import { BiUpload } from "react-icons/bi";
 import { TiDelete } from "react-icons/ti";
+import useIsSmallScreen from "../../../../../hooks/useIsSmallScreen";
 
 export default function BookingListItem({
   id,
@@ -18,6 +19,7 @@ export default function BookingListItem({
   totalPrice,
 }: Booking) {
   const [showDialog, setShowDialog] = useState(false);
+  const isSmallScreen = useIsSmallScreen(581);
 
   const checkedInOptions = [
     {
@@ -52,7 +54,7 @@ export default function BookingListItem({
         <span>{guests.fullName}</span>
         <span>{guests.email}</span>
       </div>
-      <div className="booking__guest__div">
+      <div className="booking__guest__div booking__guest__div__date">
         <span>
           {" "}
           {status === "Checked out" ? "Over" : "In"} {timeDifference(startDate)}{" "}
@@ -78,7 +80,7 @@ export default function BookingListItem({
             setShowDialog(true);
           }}
         >
-          ⋮
+          {isSmallScreen ? "⋯" : "⋮"}
         </Button>
         {showDialog && (
           <BookingDialog

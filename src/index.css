@@ -190,13 +190,6 @@
     font-size: 1.8rem;
   }
 
-  .btn-filter {
-    font-size: 1rem;
-  }
-  .section__header__sort {
-    font-size: 1.2rem;
-  }
-
   .booking__guest__div span:first-child {
     font-size: 1rem;
   }
@@ -263,6 +256,81 @@
   .login__container {
     width: 35rem;
   }
+  .section__header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .section__main__header {
+    display: none;
+  }
+
+  .booking__list__item {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .booking__totalprice {
+    grid-column: 1/2;
+    font-size: 1.5rem;
+  }
+
+  .booking__status {
+    grid-column: 2/3;
+    grid-row: -3/-2;
+    font-size: 1rem;
+    justify-self: end;
+  }
+
+  .options-btn-div {
+    grid-row: 4/5;
+    grid-column: -3/-1;
+    justify-self: center;
+  }
+
+  .booking__guest__div {
+    justify-self: end;
+  }
+
+  .booking__guest__div__date {
+    justify-self: start;
+  }
+
+  .booking__guest__div span:first-child {
+    font-size: 1rem;
+  }
+
+  .booking__cabin {
+    font-size: 1.2rem;
+  }
+
+  .booking__guest__div span:last-child {
+    font-size: 0.8rem;
+  }
+  .dialog__btn {
+    font-size: 1.4rem;
+    padding: 1.2rem 2rem;
+  }
+  .bookings__counter {
+    font-size: 1.4rem;
+  }
+  .btn-pagination {
+    font-size: 1.4rem;
+  }
+  .section__header__right {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .btn-filter {
+    font-size: 1.4rem;
+    padding: 0.8rem;
+  }
+  .section__header__sort {
+    grid-column: 1/3;
+  }
 }
 
 @media (max-width: 481px) {
@@ -300,9 +368,7 @@
   .booking__header__name {
     font-size: 2.5rem;
   }
-  .btn-filter {
-    font-size: 1.2rem;
-  }
+
   .pie__chart__heading {
     font-size: 2rem;
   }
@@ -343,9 +409,7 @@
   .booking__header__name {
     font-size: 2.5rem;
   }
-  .btn-filter {
-    font-size: 1.2rem;
-  }
+
   .pie__chart__heading {
     font-size: 2rem;
   }
