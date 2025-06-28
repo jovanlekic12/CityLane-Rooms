@@ -6,7 +6,11 @@ export default function SingleBookingHeader({ status, id }: Booking) {
     <div className="booking__header">
       <div className="booking__header__div">
         <h1 className="booking__header__name">Booking #{id}</h1>
-        <div className={`booking__status booking__${status}`}>{status}</div>
+        <div
+          className={`booking__status booking__${status} singlebooking__status`}
+        >
+          {status}
+        </div>
       </div>
       <Link to="/bookings" className="back__link">
         <IoReturnDownBack />

@@ -45,7 +45,7 @@ export default function BookingsMain({ setCurrentPage, currentPage }: Props) {
           );
         })}
       </header>
-      <ul>
+      <ul className="bookings__list">
         {isLoading && <Loader />}
         {bookings.map((booking) => {
           return <BookingListItem {...booking} />;

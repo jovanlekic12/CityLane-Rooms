@@ -52,7 +52,7 @@ function CabinsMain({
       {isLoading ? (
         <Loader />
       ) : (
-        <ul>
+        <ul className="cabins__list">
           {cabins.map((cabin) => {
             return (
               <CabinItem

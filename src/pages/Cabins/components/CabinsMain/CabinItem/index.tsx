@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CabinDialog } from "../../../../../components/CabinDialog";
 import { IoCopy, IoPencil } from "react-icons/io5";
 import { TiDelete } from "react-icons/ti";
+import useIsSmallScreen from "../../../../../hooks/useIsSmallScreen";
 
 type CabinItemProps = {
   setIsFormOpened: (isOpened: boolean) => void;
@@ -17,6 +18,7 @@ function CabinItem({
   setCabinForEdit,
 }: CabinItemProps) {
   const [showDialog, setShowDialog] = useState(false);
+  const isSmallScreen = useIsSmallScreen(581);
   const options = [
     {
       text: "Duplicate",
@@ -43,9 +45,9 @@ function CabinItem({
       <div className="cabin__capacity">Fits up to {cabin.capacity} guests</div>
       <div className="cabin__price">${cabin.price.toFixed(2)}</div>
       {cabin.discount > 0 ? (
-        <div className="cabin__discount">${cabin.discount.toFixed(2)}</div>
+        <div className="cabin__discount">-${cabin.discount.toFixed(2)}</div>
       ) : (
-        <div>-</div>
+        <div className="cabin__nodiscount">no discount</div>
       )}
       <div className="options-btn-div">
         <Button
@@ -54,7 +56,7 @@ function CabinItem({
             setShowDialog(true);
           }}
         >
-          ⋮
+          {isSmallScreen ? "⋯" : "⋮"}
         </Button>
         {showDialog && (
           <CabinDialog
