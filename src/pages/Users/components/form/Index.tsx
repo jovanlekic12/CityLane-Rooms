@@ -42,7 +42,6 @@ export default function CreateUserForm({ setIsFormOpened }: FormProps) {
         await supabase.storage
           .from("user-photos")
           .upload(`${user?.id}.jpg`, img);
-        console.log(user);
       } catch (error) {
         console.error(error);
       } finally {

@@ -8,7 +8,7 @@ const Layout = ({ token }: UserProps) => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(false);
 
   return (
-    <div className={isSidebarOpened ? "root__overlay root" : "root"}>
+    <div className="root">
       <Navbar
         token={token}
         setIsSidebarOpened={setIsSidebarOpened}
@@ -19,6 +19,7 @@ const Layout = ({ token }: UserProps) => {
         isSidebarOpened={isSidebarOpened}
         setIsSidebarOpened={setIsSidebarOpened}
       ></Sidebar>
+      <div className={isSidebarOpened ? "overlay" : ""}></div>
       <Outlet></Outlet>
     </div>
   );

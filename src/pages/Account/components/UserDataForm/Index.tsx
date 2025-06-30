@@ -35,7 +35,6 @@ export default function UserDataForm({ token }: UserProps) {
     } finally {
       setIsLoading(false);
       toast("User succesfully updated");
-      console.log(token);
     }
   }
 
@@ -65,7 +64,7 @@ export default function UserDataForm({ token }: UserProps) {
         )}
       </div>
       <div className="form__div">
-        <label className="form__label">Cabin photo</label>
+        <label className="form__label">User photo</label>
         <input
           type="file"
           className="img__input"

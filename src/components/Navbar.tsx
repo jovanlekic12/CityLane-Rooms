@@ -14,8 +14,6 @@ function Navbar({ token, setIsSidebarOpened }: LayoutProps) {
     navigate("/");
   }
 
-  console.log(token);
-
   return (
     <header className="header">
       {isSmallScreen && (

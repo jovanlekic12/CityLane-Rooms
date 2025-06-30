@@ -29,7 +29,6 @@ export default function BookingsMain({ setCurrentPage, currentPage }: Props) {
 
   const bookings = data?.data ?? [];
   const totalCount = data?.count ?? 0;
-  console.log(firstBookingIndex);
   const infos = ["Cabin", "Guest", "Dates", "Status", "Amount", ""];
 
   return (

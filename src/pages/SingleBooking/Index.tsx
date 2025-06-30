@@ -17,7 +17,6 @@ export default function SingleBooking() {
 
   const { isLoading, data: booking } = useFetchData(getBooking);
 
-  console.log(booking);
   return (
     <main className="main__container">
       {isLoading && <Loader />}

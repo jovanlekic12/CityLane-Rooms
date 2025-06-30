@@ -11,8 +11,6 @@ const LineChart: React.FC = () => {
   const days = data?.map(({ day }) => fromToday(day)).reverse();
   const stats = data?.map(({ value }) => value);
 
-  console.log(days, stats);
-
   const options = {
     tooltip: {
       trigger: "axis",
