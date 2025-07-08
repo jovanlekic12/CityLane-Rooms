@@ -19,7 +19,7 @@ const Layout = ({ token }: UserProps) => {
         isSidebarOpened={isSidebarOpened}
         setIsSidebarOpened={setIsSidebarOpened}
       ></Sidebar>
-      <div className={isSidebarOpened ? "overlay" : ""}></div>
+      {isSidebarOpened && <div className="overlay"></div>}
       <Outlet></Outlet>
     </div>
   );
