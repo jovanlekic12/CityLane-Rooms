@@ -25,12 +25,12 @@ function Navbar({ token, setIsSidebarOpened }: LayoutProps) {
         {token?.user && (
           <div className="header__user__div">
             <img
-              src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//${token.user.id}.jpg`}
+              src={`https://dhhwwtqkqrleobssinrn.supabase.co/storage/v1/object/public/user-photos//${token.user.id}.jpg`}
               alt="user avatar"
               className="header__user__img"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
-                  "https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//default-avatar.jpg";
+                  "https://dhhwwtqkqrleobssinrn.supabase.co/storage/v1/object/public/user-photos/default-avatar.jpg";
               }}
             />
             <span className="header__span">

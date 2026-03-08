@@ -24,11 +24,11 @@ export default function UserListItem({
     <div className="user__list__item">
       <img
         className="user__img"
-        src={`https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//${id}.jpg`}
+        src={`https://dhhwwtqkqrleobssinrn.supabase.co/storage/v1/object/public/user-photos//${id}.jpg`}
         alt="user photo"
         onError={(e) => {
           (e.target as HTMLImageElement).src =
-            "https://ufcfeqrveeyzpruffbba.supabase.co/storage/v1/object/public/user-photos//default-avatar.jpg";
+            "https://dhhwwtqkqrleobssinrn.supabase.co/storage/v1/object/public/user-photos//default-avatar.jpg";
         }}
       />
       <div className="user__list__name">{name}</div>
